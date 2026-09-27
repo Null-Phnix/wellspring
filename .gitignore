@@ -7,3 +7,4 @@ data/
 output/
 *.sqlite3*
 .env*
+docs/screenshots/*.png

@@ -32,4 +32,4 @@ From the repository root, after `npm run build` in `web/` (the AWS wrapper reads
     python3 scripts/aws_task.py s3 cp web/dist/web/browser/index.html s3://wellspring-demo-sitebucket-qepuhrtijij0/index.html --cache-control no-cache --content-type text/html --only-show-errors
     python3 scripts/aws_task.py cloudfront create-invalidation --distribution-id E2OWOTRIGM4VB1 --paths '/*'
 
-Hashed assets are immutable and kept (no `--delete`), so clients mid-session keep working during a rollout; only `index.html` is uncached. Screenshots of the live pages are in `../docs/screenshots/`.
+Hashed assets are immutable and kept (no `--delete`), so clients mid-session keep working during a rollout; only `index.html` is uncached. Screenshots of the live pages are served from the site bucket and indexed in `../docs/screenshots/README.md`.
