@@ -4,8 +4,9 @@ import { AskResponse } from '../api/types';
 
 export const EXAMPLES = [
   'Which licensees were issued the most licences in the last 30 days?',
-  'How many gas well licences were issued in September, by field centre?',
-  'Which target formations appear most often this month?',
+  // Explicit substance and month: looser wording ('gas well', 'this month') led the live model to filter well_type or pick August.
+  'How many licences with substance GAS were issued in September 2026, by field centre?',
+  'Which target formations (terminating zones) appeared most often in licences issued in September 2026?',
 ];
 
 @Component({
