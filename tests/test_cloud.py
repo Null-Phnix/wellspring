@@ -62,3 +62,17 @@ def test_repeat_identical_source_retains_original_provenance():
     a=run(client,'test',[date(2026,9,25)],fetch=fetch)
     b=run(client,'test',[date(2026,9,25)],fetch=fetch)
     assert a['export_sha256']==b['export_sha256']
+
+
+def test_unsupported_surface_dls_publishes_day_with_null_map_position():
+    raw=Path('fixtures/WELLS0925.TXT').read_bytes().replace(b'16-12-066-03W4',b'16-12-066-03W3',1)
+    client=S3()
+    result=run(client,'test',[date(2026,9,25)],fetch=lambda _:SimpleNamespace(status='downloaded',raw=raw))
+    assert result['event_count']==48 and result['attempts'][0]['status']=='loaded'
+    manifest=json.loads(client.objects['published/manifest.json'])
+    rows=[json.loads(line) for line in client.objects['published/'+manifest['export_file']].splitlines()]
+    target=next(r for r in rows if r['licence_number']=='0456133')
+    assert target['latitude'] is None and target['longitude'] is None
+    assert target['location_reason']=='invalid_surface_dls'
+    assert manifest['coverage']['reports_loaded']==1
+    assert manifest['coverage']['failed_dates']==[]

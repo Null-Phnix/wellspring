@@ -267,7 +267,8 @@ def parse_report(raw: bytes, *, source_url: str = "fixture:unknown", expected_da
             setattr(event, name, values[0] if all(v == values[0] for v in values) else None)
         event.dls = parse_dls(event.surface_location)
         if event.surface_location and event.dls is None:
-            issues.append(ParseIssue("invalid_surface_dls", event.surface_location,
-                                     children[0][1].source_line_start, children[-1][1].source_line_end))
+            # A surface location outside the converter is not a broken licence.
+            # Preserve the raw location and event; only its map position is absent.
+            event.location_reason = "invalid_surface_dls"
         events.append(event)
     return ParsedReport(report_date, source, raw, events, issues, blocks, duplicates)

@@ -9,6 +9,23 @@ from wellspring.ingest.publish import snapshot, write_local
 from wellspring.ingest.models import ReportError
 
 
+def get_day(day, rawdir):
+    url=day_url(day);p=rawdir/f'{day.isoformat()}.txt'
+    if p.exists():
+        cached=p.read_bytes()
+        try:
+            report=parse_report(cached,source_url=url,expected_date=day.isoformat())
+            if report.issues:raise ReportError('cached report is incomplete')
+        except ReportError:
+            # Retain rejected bytes by hash before replacing the rolling cache.
+            (rawdir/f'{hashlib.sha256(cached).hexdigest()}.txt').write_bytes(cached)
+        else:
+            return (day.isoformat(),url,cached,None,datetime.fromtimestamp(p.stat().st_mtime,timezone.utc).isoformat())
+    result=download(url)
+    if result.status=='downloaded':p.write_bytes(result.raw)
+    return (day.isoformat(),url,result.raw,result.status if result.status!='downloaded' else None,datetime.now(timezone.utc).isoformat())
+
+
 def main():
     output=Path('output/source-data');output.mkdir(parents=True,exist_ok=True)
     rawdir=output/'raw';rawdir.mkdir(exist_ok=True)
@@ -19,14 +36,8 @@ def main():
     archive_time=next(r['retrieved_at'] for r in provenance['sources'] if r['file']=='dwll2026-08.zip')
     for day,(name,raw) in archive_members(archive,2026,8).items():
         sources.append((day,'https://www.aer.ca/prd/data/well-lic/dwll2026-08.zip#'+name,raw,None,archive_time))
-    def get_day(n):
-        day=date(2026,9,n);url=day_url(day);p=rawdir/f'{day.isoformat()}.txt'
-        if p.exists():return (day.isoformat(),url,p.read_bytes(),None,datetime.fromtimestamp(p.stat().st_mtime,timezone.utc).isoformat())
-        result=download(url)
-        if result.status=='downloaded':p.write_bytes(result.raw)
-        return (day.isoformat(),url,result.raw,result.status if result.status!='downloaded' else None,datetime.now(timezone.utc).isoformat())
     with ThreadPoolExecutor(max_workers=3) as pool:
-        sources.extend(pool.map(get_day,range(1,27)))
+        sources.extend(pool.map(lambda n:get_day(date(2026,9,n),rawdir),range(1,27)))
     events=[];dates=[]
     for day,url,raw,error,retrieved_at in sorted(sources):
         if raw is None:

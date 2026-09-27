@@ -4,7 +4,7 @@ from enum import StrEnum
 from typing import Any
 
 SCHEMA_VERSION = 1
-PARSER_VERSION = "0.1.0"
+PARSER_VERSION = "0.1.1"
 
 
 class EventType(StrEnum):
