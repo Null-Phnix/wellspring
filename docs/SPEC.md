@@ -1,9 +1,13 @@
 # Wellspring: Alberta well-licence explorer
 
-Original build spec, written before the first commit and trimmed afterwards to the parts that describe the product. The build ran as a two-day exercise: ship a smaller working thing over a bigger broken one. What actually shipped, and where it differs from this plan, is recorded in `EVIDENCE.md` and `../DECISIONS.md`.
+This is the build spec I wrote before the first commit, trimmed afterwards to the parts that describe the product. The rule for the two days was: ship a smaller working thing over a bigger broken one. What actually shipped, and where it differs from this plan, is in `EVIDENCE.md` and `../DECISIONS.md`.
 
 ## Why this exists
-The Alberta Energy Regulator publishes every well licence it issues as a daily fixed-width text report. That feed is public but awkward: no API, no history view, no map. Wellspring turns it into a small, honest, public explorer so the daily licensing activity in the province can be browsed, filtered, mapped and questioned in plain English. It is an independent portfolio project, not a commercial product and not affiliated with the AER or any data vendor.
+I built this over a weekend because I was applying for a junior developer job at an energy data company in Calgary and nothing on my GitHub showed Angular, AWS, or that I knew anything about oil and gas data. I did not want to put those on a resume as words. I wanted a link.
+
+The Alberta Energy Regulator publishes every well licence it issues as a daily text file. It is public, it is fixed-width, and there is no API, no history view and no map. Wellspring takes that feed and turns it into something you can browse, filter, put on a map and ask questions about in plain English, with the SQL shown so you can check the answer.
+
+It is a portfolio piece, not a product. It is not affiliated with the AER or with anyone who sells this data.
 
 ## Data source
 AER ST1, Well Licences Issued Daily List. Public fixed-width text reports, one per day:
