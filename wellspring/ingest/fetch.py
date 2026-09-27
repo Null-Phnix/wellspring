@@ -74,7 +74,7 @@ def archive_url(year: int, month: int) -> str:
 
 
 def archive_members(raw: bytes, year: int, month: int) -> dict[str, tuple[str, bytes]]:
-    """Read flat ST1 entries without writing ZIP-controlled filesystem paths."""
+    """Read flat or ST1/ entries without writing ZIP-controlled filesystem paths."""
     date(year, month, 1)
     if not raw or len(raw) > MAX_ARCHIVE_BYTES:
         raise ValueError("empty or oversized archive")
@@ -85,7 +85,11 @@ def archive_members(raw: bytes, year: int, month: int) -> dict[str, tuple[str, b
             if len(infos) > 366 or sum(i.file_size for i in infos) > MAX_ARCHIVE_EXPANDED:
                 raise ValueError("archive expanded size or entry count exceeds limit")
             for info in infos:
-                match = re.fullmatch(r"WELLS(\d{2})(\d{2})\.TXT", info.filename, re.I)
+                # Some official months (including July 2026) add one ST1/
+                # wrapper directory. No arbitrary directory nesting is allowed.
+                if info.is_dir() and info.filename == "ST1/":
+                    continue
+                match = re.fullmatch(r"(?:ST1/)?WELLS(\d{2})(\d{2})\.TXT", info.filename, re.I)
                 if (not match or info.is_dir() or info.flag_bits & 1
                         or stat.S_ISLNK(info.external_attr >> 16)
                         or info.file_size > MAX_REPORT_BYTES
