@@ -1,6 +1,6 @@
 # Wellspring: Alberta well-licence explorer
 
-This is the build spec I wrote before the first commit, trimmed afterwards to the parts that describe the product. The rule for the two days was: ship a smaller working thing over a bigger broken one. What actually shipped, and where it differs from this plan, is in `EVIDENCE.md` and `../DECISIONS.md`.
+This is the build spec for the project, trimmed afterwards to the parts that describe the product. The rule for the two days was: ship a smaller working thing over a bigger broken one. What actually shipped, and where it differs from this plan, is in `EVIDENCE.md` and `../DECISIONS.md`.
 
 ## Why this exists
 I built this over a weekend because I was applying for a junior developer job at an energy data company in Calgary and nothing on my GitHub showed Angular, AWS, or that I knew anything about oil and gas data. I did not want to put those on a resume as words. I wanted a link.
@@ -29,7 +29,7 @@ Terms: AER public data; the AER is attributed in the README and the UI footer.
 Production volumes, current well status, pipelines, paid data, user accounts, native mobile.
 
 ## Quality gates
-Plan before build: the record schema and API contract are reviewed before code. Every change is merged at a pinned commit after an independent review and a verified test run. Nothing is called done until the URL is live and the tests are green. Decisions are logged with dates in `../DECISIONS.md`.
+Plan before build: the record schema and API contract are reviewed before code. Changes use pinned review and test receipts, with owner decisions and any exceptions recorded in Scriptorium. Nothing is called done until the URL is live and the tests are green. Decisions are logged with dates in `../DECISIONS.md`.
 
 ## Milestones
 M1: parser, tests, local SQLite, a sample month backfilled. M2: Lambda API live on AWS with the data and approximate positions. M3: Angular dashboard, table and map live on CloudFront. M4: Ask, daily schedule, README, full history backfill, release tag.
