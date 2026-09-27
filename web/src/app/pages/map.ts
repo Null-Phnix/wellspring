@@ -24,9 +24,13 @@ const MAX_PAGES = 5; // ponytail: 1000 newest events; Tenjin's M2 contract may a
       <span><i [style.background]="other"></i>Other</span>
       @if (data.value(); as v) {
         <span class="muted">
-          {{ v.plotted }} of {{ v.loaded }} loaded events plotted; {{ v.total }} issued in the window.
-          @if (v.capped) { Loading is capped at {{ cap }} events, newest first. }
-          Unplotted events have no coordinates yet.
+          @if (v.loaded && !v.plotted) {
+            No positions yet: {{ v.loaded }} events loaded, none has coordinates. The DLS conversion lands with the backend's M2.
+          } @else {
+            {{ v.plotted }} of {{ v.loaded }} loaded events plotted; {{ v.total }} issued in the window.
+            @if (v.capped) { Loading is capped at {{ cap }} events, newest first. }
+            Unplotted events have no coordinates yet.
+          }
         </span>
       }
     </p>
