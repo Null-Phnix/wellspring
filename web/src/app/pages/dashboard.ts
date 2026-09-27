@@ -1,4 +1,4 @@
-import { Component, computed, inject, resource } from '@angular/core';
+import { Component, computed, effect, inject, resource } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ApiService, isoDaysAgo } from '../api/api.service';
@@ -8,11 +8,18 @@ import { queryFromParams } from '../filters';
 export type CoverageStatus = 'loaded' | 'empty' | 'failed' | 'missing' | 'unknown';
 export const MAX_DAYS = 366; // a custom range longer than this is clipped to its last year
 
-/** Every ISO date from `from` to `to` inclusive, at most MAX_DAYS. */
+/** A window ordered and clipped to its last MAX_DAYS days, so the stats calls, totals, bars and strip all cover the same dates. */
+export function clipRange(date_from: string, date_to: string): { date_from: string; date_to: string } {
+  const [from, to] = date_from <= date_to ? [date_from, date_to] : [date_to, date_from];
+  const earliest = new Date(Date.parse(to) - (MAX_DAYS - 1) * 864e5).toISOString().slice(0, 10);
+  return { date_from: from < earliest ? earliest : from, date_to: to };
+}
+
+/** Every ISO date from `from` to `to` inclusive (clipped like clipRange). */
 export function dateRange(from: string, to: string): string[] {
+  const r = clipRange(from, to);
   const out: string[] = [];
-  const end = Date.parse(to);
-  for (let t = Math.max(Date.parse(from), end - (MAX_DAYS - 1) * 864e5); t <= end; t += 864e5) out.push(new Date(t).toISOString().slice(0, 10));
+  for (let t = Date.parse(r.date_from), end = Date.parse(r.date_to); t <= end; t += 864e5) out.push(new Date(t).toISOString().slice(0, 10));
   return out;
 }
 
@@ -141,7 +148,7 @@ export class DashboardPage {
   private readonly params = toSignal(this.route.queryParamMap, { initialValue: this.route.snapshot.queryParamMap });
   readonly range = computed(() => {
     const q = queryFromParams(k => this.params().get(k));
-    return { date_from: q.date_from!, date_to: q.date_to! };
+    return clipRange(q.date_from!, q.date_to!);
   });
   readonly preset = computed(() => [7, 30, 90].find(d => this.range().date_from === isoDaysAgo(d) && this.range().date_to === isoDaysAgo(0)) ?? null);
 
@@ -168,6 +175,19 @@ export class DashboardPage {
     },
   });
 
+  constructor() {
+    // A hand-edited URL with a window longer than MAX_DAYS is rewritten to the clipped one, so the address matches what is drawn.
+    effect(() => {
+      const p = this.params();
+      const from = p.get('date_from');
+      const to = p.get('date_to');
+      const r = this.range();
+      if (from && to && (from !== r.date_from || to !== r.date_to)) {
+        void this.router.navigate([], { relativeTo: this.route, queryParams: r, queryParamsHandling: 'merge', replaceUrl: true });
+      }
+    });
+  }
+
   /** Query params for a table view of one slice of this window. */
   slice(extra: Record<string, string>): Record<string, string> {
     return { ...this.range(), event_type: 'issued', ...extra };
@@ -183,6 +203,6 @@ export class DashboardPage {
     const date_from = String(fd.get('date_from') ?? '');
     const date_to = String(fd.get('date_to') ?? '');
     if (!date_from || !date_to) return;
-    void this.router.navigate([], { relativeTo: this.route, queryParams: date_from <= date_to ? { date_from, date_to } : { date_from: date_to, date_to: date_from } });
+    void this.router.navigate([], { relativeTo: this.route, queryParams: clipRange(date_from, date_to) });
   }
 }
