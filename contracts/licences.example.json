@@ -1,0 +1,72 @@
+{
+  "items": [
+    {
+      "id": "b3bb7abb6a4d435d4a866fbfd32544b3b30777e644bff9db57ce55b511c117fa",
+      "report_date": "2026-09-25",
+      "event_type": "issued",
+      "licence_number": "0456133",
+      "source": {
+        "url": "https://static.aer.ca/prd/data/well-lic/WELLS0925.TXT",
+        "sha256": "6ca00b6abfce235a7e442a0adaac8135cb6958ac81856731c7cdee6f2def13e2",
+        "retrieved_at": "2026-09-27T00:00:00Z",
+        "parser_version": "0.1.0"
+      },
+      "occurrences": [
+        {
+          "ordinal": 0,
+          "well_name": "IMP 26 N08-H13 ST LEMING 16-11-66-3",
+          "uwi": "102/16-11-066-03W4/02",
+          "changes": [],
+          "source_line_start": 18,
+          "source_line_end": 22,
+          "raw_text": "    IMP 26 N08-H13 ST LEMING 16-11-66-3  0456133   ALBERTA CROWN        610.20M               \n    102/16-11-066-03W4/02  S  259.8M  W  375.5M    BONNYVILLE           1677.0M             \n    DEV (NC)                             LEMING                         CLEARWATER FM                   \n    HORIZONTAL                           RESUMPTIONPRODUCTION           CRUDE BITUMEN                   \n    IMPERIAL OIL RESOURCES LIMITED                                      16-12-066-03W4                  "
+        }
+      ],
+      "schema_version": 1,
+      "well_name": "IMP 26 N08-H13 ST LEMING 16-11-66-3",
+      "uwi": "102/16-11-066-03W4/02",
+      "mineral_rights": "ALBERTA CROWN",
+      "surface_coordinates_text": "S  259.8M  W  375.5M",
+      "field_centre": "BONNYVILLE",
+      "aer_classification": "DEV (NC)",
+      "field": "LEMING",
+      "terminating_zone": "CLEARWATER FM",
+      "drilling_operation": "HORIZONTAL",
+      "well_purpose": "RESUMPTION",
+      "well_type": "PRODUCTION",
+      "substance": "CRUDE BITUMEN",
+      "licensee": "IMPERIAL OIL RESOURCES LIMITED",
+      "surface_location": "16-12-066-03W4",
+      "ground_elevation_m": 610.2,
+      "projected_depth_m": 1677.0,
+      "dls": {
+        "lsd": 16,
+        "section": 12,
+        "township": 66,
+        "range": 3,
+        "meridian": 4
+      },
+      "latitude": null,
+      "longitude": null,
+      "coordinate_method": null,
+      "location_accuracy": null,
+      "occurrence_count": 1
+    }
+  ],
+  "total": 31,
+  "page": 1,
+  "page_size": 1,
+  "meta": {
+    "schema_version": 1,
+    "data_as_of": null,
+    "date_from": "2026-09-25",
+    "date_to": "2026-09-25",
+    "event_type": "issued",
+    "coverage": {
+      "reports_loaded": 1,
+      "missing_dates": [],
+      "failed_dates": [],
+      "parse_issue_count": 0
+    }
+  }
+}

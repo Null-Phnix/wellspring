@@ -1,0 +1,331 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Wellspring LicenceEvent v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "report_date",
+    "event_type",
+    "licence_number",
+    "well_name",
+    "uwi",
+    "mineral_rights",
+    "surface_coordinates_text",
+    "field_centre",
+    "aer_classification",
+    "field",
+    "terminating_zone",
+    "drilling_operation",
+    "well_purpose",
+    "well_type",
+    "substance",
+    "licensee",
+    "surface_location",
+    "ground_elevation_m",
+    "projected_depth_m",
+    "dls",
+    "latitude",
+    "longitude",
+    "coordinate_method",
+    "location_accuracy",
+    "occurrence_count",
+    "occurrences",
+    "source"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "report_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "event_type": {
+      "enum": [
+        "issued",
+        "reentry",
+        "amended",
+        "cancelled",
+        "updated"
+      ]
+    },
+    "licence_number": {
+      "type": "string",
+      "pattern": "^[0-9]{7}$"
+    },
+    "well_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "uwi": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "mineral_rights": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "surface_coordinates_text": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "field_centre": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "aer_classification": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "field": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "terminating_zone": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "drilling_operation": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "well_purpose": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "well_type": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "substance": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "licensee": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "surface_location": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ground_elevation_m": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "projected_depth_m": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "dls": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "lsd",
+            "section",
+            "township",
+            "range",
+            "meridian"
+          ],
+          "properties": {
+            "lsd": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 16
+            },
+            "section": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 36
+            },
+            "township": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 126
+            },
+            "range": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 30
+            },
+            "meridian": {
+              "type": "integer",
+              "minimum": 4,
+              "maximum": 6
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "latitude": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": -90,
+      "maximum": 90
+    },
+    "longitude": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": -180,
+      "maximum": 180
+    },
+    "coordinate_method": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "location_accuracy": {
+      "enum": [
+        "approximate",
+        null
+      ]
+    },
+    "occurrence_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "occurrences": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "ordinal",
+          "well_name",
+          "uwi",
+          "changes",
+          "source_line_start",
+          "source_line_end",
+          "raw_text"
+        ],
+        "properties": {
+          "ordinal": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "well_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "uwi": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "changes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "field",
+                "label",
+                "value"
+              ],
+              "properties": {
+                "field": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "source_line_start": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "source_line_end": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "raw_text": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "url",
+        "sha256",
+        "retrieved_at",
+        "parser_version"
+      ],
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "retrieved_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "parser_version": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
