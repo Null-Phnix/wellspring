@@ -1,87 +1,142 @@
-# Wellspring evidence and open gates
+# Wellspring evidence and limitations
 
-Snapshot: September 27, 2026. Distinguish implementation, review, merge,
-deployment and observed runtime. A local test pass is not a forge CI receipt.
+Observed September 27, 2026. Implementation, review, merge, deployment and runtime
+are separate evidence. Scriptorium issue #1 contains the coordinated receipts.
 
-| Area | Evidence | Remaining gate or limit |
+| Area | Verified evidence | Limit |
 | --- | --- | --- |
-| M1 ingestion | Real August backfill: 31 reports, 1,130 events, 1,455 occurrences; idempotence and SQLite integrity checked | Full January-to-current backlog is not loaded |
-| M2 initial deployment | Source e32c27e; both Lambda hashes matched the deployment bundle; ten HTTP checks passed | Later follow-up source must be deployed and reverified separately |
-| M2 review close-out | Change #274, head 222e1d4, 231 Python tests; independent review approved | Pinned merge mandate #280 awaits owner approval |
-| Map contract addition | Change #279 adds surface_location to points and documents all coverage fields; 232 Python tests | Review, merge and deployment pending |
-| Scheduled intake | Lambda started 13:00:44 UTC and ended normally; one invocation metric in that minute; manifest published 13:00:46.971395 UTC | A manual test was not used as scheduled-run evidence |
-| Current source coverage | 57 loaded reports through September 26; 2,100 events; 899 issued; no failed dates after the scheduled run | September 27 is not yet published |
-| Coordinates | 77 government ATS references, seven held-out checks, five independently re-fetched by the owner agent; 865 mapped events | 1.201 km maximum observed sample error is not a universal guarantee |
-| Frontend | Tenjin independently loaded the live dashboard and a filtered licence-table deep link, then refreshed it; no captured browser errors | Nabu owns the full UI/test/deploy receipts on issue #4 |
-| M4 Ask | Current live response is ASK_UNAVAILABLE; implementation plan posted on issue #1 | Provider key absent from the authorized configuration; plan approval and implementation remain |
-| Release | Private mirror approval exists in board reply #127 | No v0.1.0 tag or GitHub mirror until the required release steps finish |
+| M1 ingestion | August fixture: 31 reports, 1,130 events and 1,455 occurrences; idempotence and SQLite integrity checked | Later reports may revise historical data |
+| M2 follow-ups | Changes #274 and #279 merged; unsupported DLS no longer rejects a valid report; generated contracts and points projection corrected | Structural/header-date errors remain fatal |
+| M3 frontend | Live dashboard, filtered licence table, map, Ask and About; 31 tests in 8 files and production build passed locally, also independently reproduced by Nabu | Unit tests do not prove every browser/device |
+| M4 Ask | Change #285 source 17e7e7a independently approved and forge-verified; merged main a4c337a deployed and configuration verified | Generated SQL can still misunderstand a question |
+| Current dataset | 57 loaded reports, August 1 to September 26: 2,100 events, 899 issued, 865 approximate positions, no failed dates | January to July backfill remains outside this snapshot; current-day unpublished data is not zero |
+| Scheduled intake | Actual Lambda start 13:00:44 UTC; normal END/REPORT and one invocation metric in that minute; manifest publication 13:00:46.971395 UTC | Later manual smoke calls are not scheduled-run evidence |
+| Coordinates | 77 government ATS references, 7 held out; 5 independently refetched; maximum observed sample error 1.201 km | Not a universal bound or surveyed wellhead position |
+| Access | Both buckets private; CloudFront-only public site access; narrow API secret/quota grants; scoped ingestion writes | Account administrator privileges were not exhaustively audited |
 
-## September 26 diagnosis
+## Tests and forge evidence
 
-The overnight WELLS0926.TXT file explicitly carried a September 26, 2025 header.
-The strict date guard correctly rejected it for a September 26, 2026 request.
-By the scheduled morning intake, AER had replaced it with a valid 2026 empty
-report, which loaded successfully. This was separate from the unsupported-DLS
-parser bug. The local cache now revalidates a cached report and re-fetches stale
-or incomplete data, retaining rejected bytes by hash.
+The integrated M4 source passed **316 backend tests**, **31 web tests in 8 files**
+and the Angular production build. The M4 predecessor a4c337a passed 310 backend
+tests; Nabu independently reproduced those 310 plus the same 31 web tests.
+Six additional regressions cover the official ST1/ archive wrapper without
+allowing traversal, arbitrary nesting or duplicate days. SQL tests cover read-only enforcement, DML/DDL, PRAGMA,
+ATTACH, comments, multi-statements including quoted trailers, invalid functions,
+metadata access, timeouts and result limits. Integration tests cover unavailable
+secrets/provider/counter, atomic quota allocation, actual served-model metadata,
+credential-echo refusal and deployment configuration drift.
 
-## Tests and review
-
-The unsupported-DLS regression modifies only the surface meridian in a real
-fixture block, retains all 48 events through SQLite and cloud publication, and
-checks the null location reason. Generated contract tests check the live Ask
-refusal and both mapped and unplotted examples. Structural and date-validation
-failures remain covered.
-
-The initial frontend baseline checked by Tenjin passed eight unit tests and a
-production build under Node 26.10.0. Nabu has reported 30 tests on the newer UI
-work; that reported count is separate from Tenjin's baseline run and the forge's
-actual combined check. The requested combined command is:
+The combined command is:
 
 ```bash
 python3 -m pip install -q -e '.[test]' && python3 -m pytest -q && (cd web && npm ci --no-audit --no-fund && npm test -- --watch=false && npm run build)
 ```
 
-The forge runner configuration is owner-controlled. Do not call the author-logged
-check rollup proof that this command ran in the forge.
+Angular uses Vitest/jsdom here, not ChromeHeadless. GitHub's checked-in workflow
+runs Python 3.11/3.14 and Node 22 lanes. The exact-head forge metadata records a
+passed check for change #285 at 17e7e7afd9cea36d64bc7f1e188965780e4319fc and an
+approved independent review. That metadata alone does not disclose the executed
+command. Anubis confirmed in issue #1 #174 that this was the Python-only check. The
+combined command is locally verified, but an owner setting is required before
+the forge runs it. Anubis explicitly allowed release with that distinction; no
+combined forge result is claimed. GitHub workflow outcomes must also be read
+back after mirroring.
 
-## Runtime receipts
+## Deployment and scheduled operation
 
-API: https://yjzy2hz1z1.execute-api.ca-central-1.amazonaws.com
+- Site: https://d157m2vmtz6y3j.cloudfront.net/
+- API: https://yjzy2hz1z1.execute-api.ca-central-1.amazonaws.com
+- Stack: `wellspring-demo`, `ca-central-1`.
+- Verified backend source: `a4c337a168bbea8e5ee32fe03489e53c14c53793`.
+- Both Lambda code packages matched SHA-256
+  `02ef2ace57a905ef60ac0663aedebe508a51b733062c1624f28495883f870a13`.
+- Ask enabled state, provider/model/key reference/daily limit and actual API
+  environment were read back. Only the secret reference is an environment value.
+- Daily schedule restored and read back as ENABLED, `cron(0 7 * * ? *)`,
+  `America/Edmonton`. It checks recent completed days intentionally.
+- CloudFront E2OWOTRIGM4VB1 has actual 403/404 responses to `/index.html`, HTTP 200,
+  zero error caching. A filtered deep link survived full reload.
+- Nabu's About deployment (#283, 0ad77a4, bundle main-ODYG5JHL.js) aligns with the
+  corrected README authorship paragraph from repo-board #134.
 
-Site: https://d157m2vmtz6y3j.cloudfront.net/
+The September 26 rolling source initially carried a **September 26, 2025**
+header. Strict validation correctly refused it as a 2026 report. By the real
+scheduled morning run, AER supplied a valid 2026 empty report. The local cache
+now revalidates/refetches stale content and retains rejected bytes by hash.
+This source-date failure was separate from the unsupported-DLS parser defect.
 
-CloudFront distribution E2OWOTRIGM4VB1 was read directly: both 403 and 404 rewrite
-to `/index.html`, HTTP 200, with zero error caching. The direct
-`/licences?licensee=cenovus` link and a full refresh returned the filtered table
-with 106 matching events in the observed default window.
+A later manual M4 ingestion smoke retained all 2,100 events and retried September
+24 to 26 successfully. Its publication time is not the last scheduled-run time.
 
-Local receipts are under `output/deployment/` in the development worktree:
-`verified-deployment.json`, `final-http-smoke.json`,
-`scheduled-ingest-morning.json`, `cloudfront-morning.json`,
-`morning-access-audit.json`, `morning-usage.json` and `s3-price.json`.
-Generated outputs stay out of Git; the concise claims and reproduction commands
-are preserved here and in the Scriptorium task Chronicle.
+## Real Ask acceptance
+
+The three responses were independently compared with Python counts from the
+hash-verified snapshot, rather than checked only for HTTP 200. Snapshot SHA-256:
+`0cba13ea39ebbb11b753c82f9757cf7da862a59809213c8bc4162a024938a942`.
+Configured alias: `deepseek-chat`; all three returned actual model
+`deepseek-flash`, `status:ok`, and `truncated:false`.
+
+| Question | Returned result | Rows | Elapsed |
+| --- | --- | --- | --- |
+| Top five issued licensees in August 2026 | Canadian Natural 73, Cenovus 69, Spur 48, Strathcona 15, Headwater 14 | 5 | 5.786 s |
+| September issued GAS by field centre | Bonnyville 1, Drayton Valley 30, Edmonton 5, Fort McMurray 3, Grande Prairie 23, Red Deer 10, Slave Lake 1 | 7 | 1.479 s |
+| Issued events by Monday-based week, YYYY-%W | Weeks 31 to 38: 71, 98, 102, 112, 139, 89, 103, 185 | 8 | 1.180 s |
+
+Full questions, SQL, rows and curl reproduction commands are on issue #1 #171;
+local `ask-real-receipts.json` retains responses and expected rows. The GAS query
+used substring matching, which matches the independently checked exact GAS
+counts on this snapshot; that is not a universal semantic-correctness guarantee.
+A requested DROP TABLE returned READ_ONLY_REQUIRED, no SQL and no rows. The
+counter was 4 after these attempts and 5 after a separate browser query returned
+899 issued events with inspectable SQL and no captured console errors.
+
+## Wider historical snapshot prepared for publication
+
+The original January-to-current scope was fetched and parsed in isolation.
+The candidate includes 266 valid report dates, 37 empty dates, 8,811 events and
+11,324 occurrences. Counts: 3,763 issued, 1,113 amended, 3,469 updated and 466
+cancelled. The export is 18,501,272 bytes, SHA-256
+`89656c14cb785a92200680590a4bfe6f406bad8821573138c72c3c060ec8f2e6`.
+All original 2,100 event IDs remain present. Owner checks re-read every usable
+report header/hash, all eight archive layouts and SQLite integrity. API loading
+plus grouped SQL ran locally in 0.284 seconds at 134.4 MiB peak RSS. That is local
+capacity evidence, not measured Lambda memory.
+
+January 11 and 16 lack an end marker; July 9 contains a literal `/---W/` UWI in
+an amendment. Independent owner downloads from the rolling daily endpoints
+matched the same byte hashes, so the failures were not just stale archives.
+September 27 still serves a 2025 header. All four remain failed dates, not zeroes
+or silently accepted partial days. No validation rule was weakened to fill them.
+July's official ZIP uses `ST1/`; the shared reader now supports that exact wrapper
+while preserving limits and path/duplicate rejection. Raw source archives and
+individual reports remain in the isolated output. This candidate is not called
+live until its publication and API readback are recorded.
+
+## Release procedure and known limits
+
+The owner approved a **private** `Null-Phnix/wellspring` mirror. Tag v0.1.0 only
+after required work merges with the configured forge check and independent
+review approved at the pinned head. The combined forge setting limitation above
+remains explicit. Scriptorium
+Scribe Git permissions disallow raw tag creation; the owner-admin governed tag
+operation must target the exact merged release commit. Then mirror only main and
+the tag, verify private visibility and matching hashes, and record the final
+URLs and receipts on issue #1. No tag or mirror completion is implied by this
+pre-release document.
+
+Limitations: partial historical coverage in the current snapshot; approximate
+and sometimes absent coordinates; preliminary/revisable source data; a shared
+100-attempt UTC-day Ask quota; 200 returned rows and a ten-second wall budget;
+model-generated SQL may misunderstand requests; no user accounts or production
+SLA; owner-managed budget alarm not independently verified. This is an
+independent educational demo, not an AER or GeoLOGIC product.
+
+Raw runtime receipts remain outside Git under `output/deployment/`, including
+`verified-deployment.json`, `scheduled-ingest-morning.json`,
+`m4-ingest-smoke.json`, `m4-access-audit.json`, `m4-schedule-counter.json`,
+`ask-real-receipts.json`, and `cloudfront-morning.json`. The concise evidence and
+reproduction instructions are retained in Git and the forge Chronicle.
 
 See [M1 detail](M1-EVIDENCE.md), [M2 detail](M2-EVIDENCE.md),
-[DLS references](DLS.md) and [deployment/recovery](DEPLOYMENT.md).
-
-
-## Afternoon M4 source validation
-
-The earlier provider and merge blockers were resolved by the owner. The approved
-DeepSeek key was copied to one SSM SecureString without printing its value or
-storing it in source/bundles/command arguments. The requested `deepseek-chat`
-alias is accepted by the authenticated provider and currently reports
-`deepseek-flash` as its served model. A bounded authentication probe returned
-`SELECT 1;` in 0.735 seconds using 23 tokens. This probe is not one of the required
-post-deployment business-query receipts.
-
-M4 implements the read-only SQLite boundary, one shared deadline, 200-row cap,
-provider refusal handling, secret read and atomic 100-attempt daily quota.
-The source was checked with the integrated backend suite and 31 frontend tests
-plus a production build. An independent local integration review found three
-issues (unverified/unsafe provider model metadata and incomplete enabled-state
-deployment verification); they were fixed and rechecked. Exact counts and source
-SHAs are recorded in the task Chronicle. Live M4 deployment and the three real
-question receipts still require their own evidence before release.
+[DLS references](DLS.md), [SQL boundary](ASK-SAFETY.md),
+[cost/access](COST-ACCESS.md) and [deployment/recovery](DEPLOYMENT.md).

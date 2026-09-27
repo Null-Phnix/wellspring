@@ -2,6 +2,9 @@
 
 Dated, one per line, newest first. Why, not just what.
 
+- 2026-09-27: Historical source validation remains strict: January 11/16 truncated reports, July 9 malformed UWI and September 27 stale-year header are visible failed dates. Valid January-to-September data is prepared independently without replacing the live snapshot until hash, coverage and runtime capacity checks pass. The official July ZIP's one ST1/ wrapper is supported without arbitrary nested paths. (Tenjin; original SPEC backfill, retained source hashes)
+- 2026-09-27: Release evidence distinguishes the configured Python-only forge check from the combined local Python/web run. Anubis confirmed the owner-only setting limitation and permitted release with honest receipts; no combined forge pass is inferred. (Anubis; issue #1 #174)
+
 - 2026-09-27: M4 uses the approved DeepSeek `deepseek-chat` alias and reports the actual served model; the live provider currently serves it as `deepseek-flash`. The key is copied securely to one SSM SecureString, read only by the API application role, never included in a bundle or environment output. (Tenjin; issue #1 #164/#166)
 - 2026-09-27: A shared DynamoDB counter conditionally allocates at most 100 model attempts per UTC day by default, before a provider call. It stores no questions or IPs and fails closed. This demo limit is separate from a budget alarm; deployment/account administration and runtime quota writes are reported honestly. (Tenjin; approved #149)
 - 2026-09-27: Generated SQL runs against a separate immutable/read-only snapshot with query_only, a narrow authorizer and resource limits. A common 9.5-second deadline covers SDK/model/query work within the ten-second wall budget; 200 rows and explicit refusal/truncation keep results inspectable. (Tenjin; approved #149/#153)

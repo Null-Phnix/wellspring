@@ -40,6 +40,25 @@ def test_not_a_zip_is_refused():
         archive_members(b"<html>error</html>", 2026, 8)
 
 
+def test_official_st1_wrapper_preserves_member_name_and_bytes():
+    raw = zipped([("ST1/", b""), ("ST1/WELLS0701.txt", b"exact report bytes")])
+    assert archive_members(raw, 2026, 7) == {
+        "2026-07-01": ("ST1/WELLS0701.txt", b"exact report bytes")
+    }
+
+
+@pytest.mark.parametrize("name", ["ST1/../WELLS0701.TXT", "ST1/nested/WELLS0701.TXT", "other/", "ST1/other.txt"])
+def test_archive_wrapper_does_not_allow_other_paths(name):
+    with pytest.raises(ValueError):
+        archive_members(zipped([(name, b"synthetic")]), 2026, 7)
+
+
+def test_flat_and_wrapped_same_date_is_still_duplicate():
+    raw = zipped([("WELLS0701.TXT", b"one"), ("ST1/WELLS0701.TXT", b"two")])
+    with pytest.raises(ValueError, match="duplicate"):
+        archive_members(raw, 2026, 7)
+
+
 @pytest.mark.parametrize("url", ["http://static.aer.ca/prd/data/well-lic/WELLS0801.TXT", "https://evil.test/prd/data/well-lic/WELLS0801.TXT", "https://static.aer.ca.evil.test/prd/data/well-lic/WELLS0801.TXT", "https://u:p@static.aer.ca/prd/data/well-lic/WELLS0801.TXT", "https://static.aer.ca:444/prd/data/well-lic/WELLS0801.TXT", "https://static.aer.ca/other/data.txt"])
 def test_download_url_is_confined_to_public_source(url):
     with pytest.raises(ValueError):

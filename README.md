@@ -14,10 +14,11 @@ product and is not affiliated with or endorsed by the AER or GeoLOGIC.
 
 The ingestion pipeline and read-only API are live on AWS. The Angular frontend
 uses live data and includes a dashboard, licence table, map, Ask and About.
-The Ask endpoint currently returns `ASK_UNAVAILABLE`; it does not yet make model
-calls. A final release tag and private GitHub mirror are pending the remaining
-review, provider and release gates. See [the evidence record](docs/EVIDENCE.md)
-for what was tested, deployed and still unfinished.
+Ask turns a question into inspectable SQL and runs a guarded, read-only query
+against the public dataset. It uses DeepSeek, limits answers to 200 rows and
+shares a 100-attempt daily allowance across the demo. Unsupported requests and
+unavailable services produce explicit refusals. See [the evidence record](docs/EVIDENCE.md)
+for deployed versions, checks and known limitations.
 
 The verified sample covers August 2026 and September through the latest published
 report. It is not the full January-to-current backlog. Coverage reports missing,
@@ -57,6 +58,9 @@ flowchart LR
   E --> F[Read-only Lambda HTTP API]
   F --> G[Angular app on CloudFront]
   H[07:00 Mountain schedule] --> B
+  G --> I[Question to DeepSeek SQL]
+  I --> J[Guarded read-only SQLite snapshot]
+  J --> G
 ```
 
 A licence can be issued and cancelled on the same day. It can also have several
@@ -93,7 +97,7 @@ separately from successful deployed-code verification. The daily schedule uses
 `America/Edmonton` so 7am Mountain follows daylight saving time.
 
 [The API contract](docs/API-CONTRACT.md) documents filters, pagination, points,
-coverage and refusal responses. [Cost and access evidence](docs/COST-ACCESS.md)
+coverage and Ask responses. [Cost and access evidence](docs/COST-ACCESS.md)
 records current limits and assumptions. The owner-managed budget alarm is not a
 spending cap. Secrets are never part of the repository or deployment package.
 
