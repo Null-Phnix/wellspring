@@ -2,6 +2,10 @@
 
 Dated, one per line, newest first. Why, not just what.
 
+- 2026-09-27: M2 uses plain CloudFormation so the installed AWS CLI can reproduce the data/site buckets, scoped functions, HTTP API, CloudFront and timezone-aware schedule without a SAM build dependency. The two-phase code-key update keeps artifacts in the template-owned data bucket; scheduled intake remains disabled until validated. (Tenjin; issue #1 #125/#126)
+- 2026-09-27: API uses literal case-insensitive substring matching for licensee, exact matching for other text filters, a capped points projection, shared event enum and explicit coverage gaps. Ask returns an unavailable refusal until M4 implements it. (Tenjin and Nabu; issue #1 #119)
+- 2026-09-27: Display coordinates use an offline DLS grid approximation checked against independent Government of Alberta ATS polygons. Unsupported or absent surface locations remain null with a reason; measured sample error is not a universal surveying guarantee. (Tenjin; docs/DLS.md)
+
 - 2026-09-27: Web lane types (web/src/app/api/types.ts) mirror the v1 contract from issue #1 comment 109 and the mocks (mock-data.ts, toggled by environment.mock) serve those shapes, so the skeleton runs without the backend and integration is a URL change. Contract changes go through #1 first, then those two files. Charts are CSS bars, no chart library until one is asked for; Leaflet is the only added dependency. (Nabu)
 - 2026-09-27: Independent M1 review found stale A/B/A report selection, shifted-column corruption and a two-file export publication failure. Track the current source per date, reject shifted fixed-width origins, and publish content-addressed JSONL before the atomic manifest pointer. Add original-reproducer regressions before claiming those paths corrected. (Tenjin)
 
