@@ -2,6 +2,8 @@
 
 Dated, one per line, newest first. Why, not just what.
 
+- 2026-09-27: Unsupported surface DLS is a nullable location limitation on the event, not a fatal report parse error. Preserve the raw location and all other valid events, bump parser version to 0.1.1, and leave structural/date errors fatal. September 26 was a stale 2025 source header, so its date guard is retained. (Tenjin; findings 124/125/128 close-out)
+
 - 2026-09-27: M2 uses plain CloudFormation so the installed AWS CLI can reproduce the data/site buckets, scoped functions, HTTP API, CloudFront and timezone-aware schedule without a SAM build dependency. The two-phase code-key update keeps artifacts in the template-owned data bucket; scheduled intake remains disabled until validated. (Tenjin; issue #1 #125/#126)
 - 2026-09-27: API uses literal case-insensitive substring matching for licensee, exact matching for other text filters, a capped points projection, shared event enum and explicit coverage gaps. Ask returns an unavailable refusal until M4 implements it. (Tenjin and Nabu; issue #1 #119)
 - 2026-09-27: Display coordinates use an offline DLS grid approximation checked against independent Government of Alberta ATS polygons. Unsupported or absent surface locations remain null with a reason; measured sample error is not a universal surveying guarantee. (Tenjin; docs/DLS.md)
