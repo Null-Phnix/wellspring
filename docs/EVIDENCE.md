@@ -125,12 +125,14 @@ counts, with no truncation, in 8.271/1.699/1.759 seconds. DROP was refused again
 The shared counter read 26/100 at 17:10 UTC, including other live callers. Full
 questions, SQL and answers are in [ASK-RECEIPTS.md](ASK-RECEIPTS.md).
 
-## Release and private mirror
+## Release and source mirror
 
-The owner approved the private repository at
-https://github.com/Null-Phnix/wellspring. It contains only `main` and `v0.1.0`.
-The README and live About page link to it; access requires the owner or an
-explicitly added reader. Public demo access does not grant source access.
+The repository at https://github.com/Null-Phnix/wellspring was initially private.
+On September 27, 2026, the owner explicitly authorized public visibility after
+a document and repository review. Anonymous GitHub and API readback confirmed
+that it is now public. It contains only `main` and `v0.1.0`; the README and live
+About page link to it. The clean-history and owner-tag requirements remain in
+force.
 
 The canonical Scriptorium release is
 `6a13f2c7c0b02bfa1a0e8d1ea48838bb0b72af91`. Its audit history and forge-created
