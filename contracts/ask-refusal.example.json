@@ -1,0 +1,25 @@
+{
+  "status": "refused",
+  "columns": [],
+  "rows": [],
+  "sql": null,
+  "row_limit": 200,
+  "truncated": false,
+  "refusal": {
+    "code": "READ_ONLY_REQUIRED",
+    "message": "Only read-only data questions are supported."
+  },
+  "meta": {
+    "schema_version": 1,
+    "data_as_of": null,
+    "date_from": "2026-09-25",
+    "date_to": "2026-09-25",
+    "event_type": "issued",
+    "coverage": {
+      "reports_loaded": 1,
+      "missing_dates": [],
+      "failed_dates": [],
+      "parse_issue_count": 0
+    }
+  }
+}

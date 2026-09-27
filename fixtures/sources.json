@@ -1,0 +1,18 @@
+{
+  "sources": [
+    {
+      "file": "dwll2026-08.zip",
+      "url": "https://www.aer.ca/prd/data/well-lic/dwll2026-08.zip",
+      "sha256": "ec92c3f83ceba89d37b0b6678e7dc6e2956b2ff307074cf298049767f8cf41cc",
+      "retrieved_at": "2026-09-27T04:00:47.980038+00:00",
+      "discovered_from": "https://www.aer.ca/data-and-performance-reports/statistical-reports/st1",
+      "use": "Noncommercial educational reproduction; AER attribution; preliminary, not official or endorsed."
+    },
+    {
+      "file": "WELLS0925.TXT",
+      "url": "https://static.aer.ca/prd/data/well-lic/WELLS0925.TXT",
+      "sha256": "6ca00b6abfce235a7e442a0adaac8135cb6958ac81856731c7cdee6f2def13e2",
+      "provenance": "Seed fixture from Anubis commit c327fa02; header September 25 2026; original download timestamp unavailable."
+    }
+  ]
+}
