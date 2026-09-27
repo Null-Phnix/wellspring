@@ -1,5 +1,5 @@
 import { parseDls } from '../dls.pipe';
-import { AskResponse, DataMeta, Dls, EventType, LicenceEvent, LicencePage, LicenceQuery, SortKey, Stats, StatsQuery } from './types';
+import { AskResponse, DataMeta, Dls, EventType, LicenceEvent, LicencePage, LicencePoint, LicenceQuery, PointPage, SortKey, Stats, StatsQuery } from './types';
 
 // Six records lifted from fixtures/WELLS0925.TXT plus four shape-faithful
 // placeholders (SAMPLE licensees) for the field centres and substances the
@@ -47,6 +47,7 @@ function make(b: (typeof BASE)[number], licence_number: string, event_type: Even
     ground_elevation_m: full(ground_elevation_m), projected_depth_m: full(projected_depth_m),
     dls: sparse ? null : dls, latitude: sparse ? null : latitude, longitude: sparse ? null : longitude,
     coordinate_method: sparse ? null : 'mock-township-grid', location_accuracy: sparse ? null : 'approximate',
+    location_reason: sparse ? 'surface_location_unreported' : null,
     occurrence_count: 1,
     occurrences: [{ ordinal: 1, well_name, uwi, changes: [], source_line_start: 0, source_line_end: 0, raw_text: '' }],
     source: { url: `https://static.aer.ca/prd/data/well-lic/WELLS${report_date.slice(5, 7)}${report_date.slice(8, 10)}.TXT`, sha256: '', retrieved_at: TODAY.toISOString(), parser_version: 'mock' },
@@ -86,10 +87,12 @@ function select(q: StatsQuery): LicenceEvent[] {
 }
 
 function meta(q: StatsQuery): DataMeta {
+  const loaded = [...REPORT_DATES].filter(d => (!q.date_from || d >= q.date_from) && (!q.date_to || d <= q.date_to)).sort();
   return {
     schema_version: 1, data_as_of: TODAY.toISOString(), date_from: q.date_from ?? null, date_to: q.date_to ?? null,
     event_type: q.event_type ?? 'issued',
-    coverage: { reports_loaded: REPORT_DATES.size, missing_dates: [], failed_dates: [], parse_issue_count: 0 },
+    coverage: { reports_loaded: loaded.length, loaded_dates: loaded, empty_dates: [], missing_dates: [], failed_dates: [],
+      retry_failed_dates: [], parse_issue_count: 0, parse_issues_by_date: {} },
   };
 }
 
@@ -100,6 +103,16 @@ export function mockLicences(q: LicenceQuery): LicencePage {
   const page = Math.max(1, q.page ?? 1);
   const page_size = Math.min(200, Math.max(1, q.page_size ?? 50));
   return { items: items.slice((page - 1) * page_size, page * page_size), total: items.length, page, page_size, meta: meta(q) };
+}
+
+export function mockPoints(q: LicenceQuery): PointPage {
+  const page = mockLicences(q);
+  const items: LicencePoint[] = page.items.map(r => ({
+    id: r.id, licence_number: r.licence_number, well_name: r.well_name, licensee: r.licensee, substance: r.substance,
+    report_date: r.report_date, latitude: r.latitude, longitude: r.longitude, coordinate_method: r.coordinate_method,
+    location_accuracy: r.location_accuracy, location_reason: r.location_reason,
+  }));
+  return { ...page, items };
 }
 
 export function mockStats(path: string, q: StatsQuery): Stats<Record<string, unknown>> {

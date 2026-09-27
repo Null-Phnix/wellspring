@@ -23,8 +23,9 @@ import { ApiService, isoDaysAgo } from '../api/api.service';
         </div>
         <p class="muted">
           {{ v.daily[0]?.date }} to {{ v.daily[v.daily.length - 1]?.date }}, {{ v.total }} licences issued,
-          {{ v.meta.coverage.reports_loaded }} daily lists loaded
-          @if (v.meta.coverage.missing_dates.length) { , {{ v.meta.coverage.missing_dates.length }} missing }
+          {{ v.meta.coverage?.reports_loaded ?? 0 }} daily lists loaded
+          @if (v.meta.coverage?.missing_dates?.length) { , {{ v.meta.coverage?.missing_dates?.length }} missing }
+          @if (v.meta.coverage?.failed_dates?.length) { , {{ v.meta.coverage?.failed_dates?.length }} failed }
         </p>
       </section>
       <div class="cols">

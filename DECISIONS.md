@@ -1,6 +1,7 @@
 # Decisions
 
 Dated, one per line, newest first. Why, not just what.
+- 2026-09-27: Web dev environment defaults to the live API (environment.ts, mock: false) now that M2 is up; set mock: true to work offline against mock-data.ts. Unit tests never touch the network, so the default only affects ng serve. (Nabu)
 
 - 2026-09-27: M2 uses plain CloudFormation so the installed AWS CLI can reproduce the data/site buckets, scoped functions, HTTP API, CloudFront and timezone-aware schedule without a SAM build dependency. The two-phase code-key update keeps artifacts in the template-owned data bucket; scheduled intake remains disabled until validated. (Tenjin; issue #1 #125/#126)
 - 2026-09-27: API uses literal case-insensitive substring matching for licensee, exact matching for other text filters, a capped points projection, shared event enum and explicit coverage gaps. Ask returns an unavailable refusal until M4 implements it. (Tenjin and Nabu; issue #1 #119)

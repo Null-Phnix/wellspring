@@ -10,7 +10,7 @@ const lic = (n: number, licensee: string, substance: string): LicenceEvent => ({
   terminating_zone: 'BLUESKY FM', drilling_operation: 'HORIZONTAL', well_purpose: 'NEW', well_type: 'PRODUCTION',
   substance, licensee, surface_location: '04-10-085-17W5', ground_elevation_m: 600, projected_depth_m: 2750,
   dls: { lsd: 4, section: 10, township: 85, range: 17, meridian: 5 }, latitude: null, longitude: null,
-  coordinate_method: null, location_accuracy: null, occurrence_count: 1, occurrences: [],
+  coordinate_method: null, location_accuracy: null, location_reason: 'not_yet_converted', occurrence_count: 1, occurrences: [],
   source: { url: '', sha256: '', retrieved_at: '', parser_version: 'test' },
 });
 const META = { schema_version: 1 as const, data_as_of: null, date_from: null, date_to: null, event_type: 'issued',

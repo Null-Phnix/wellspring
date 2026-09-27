@@ -50,11 +50,28 @@ export interface LicenceEvent {
   dls: Dls | null;
   latitude: number | null; // null until the DLS approximation is verified
   longitude: number | null;
-  coordinate_method: string | null;
+  coordinate_method: string | null; // "alberta_dls_grid_approximation_v1" on live
   location_accuracy: 'approximate' | null;
+  location_reason: string | null; // why latitude/longitude are null, when they are
   occurrence_count: number;
   occurrences: Occurrence[];
   source: { url: string; sha256: string; retrieved_at: string; parser_version: string };
+}
+
+/** GET /licences?fields=points: the same paging and meta, each item projected to exactly these keys. */
+export interface LicencePoint {
+  id: string;
+  licence_number: string;
+  well_name: string | null;
+  licensee: string | null;
+  substance: string | null;
+  report_date: string;
+  latitude: number | null;
+  longitude: number | null;
+  coordinate_method: string | null;
+  location_accuracy: 'approximate' | null;
+  location_reason: string | null;
+  surface_location?: string | null; // asked for on issue #1; absent until Tenjin adds it
 }
 
 export type SortKey = 'report_date' | 'licence_number' | 'licensee' | 'substance' | 'field_centre' | 'terminating_zone' | 'well_type';
@@ -73,10 +90,23 @@ export interface LicenceQuery {
   page_size?: number;
   sort?: SortKey;
   order?: 'asc' | 'desc';
+  fields?: 'points';
 }
 
 /** The same filters apply to /stats/*. */
-export type StatsQuery = Omit<LicenceQuery, 'page' | 'page_size' | 'sort' | 'order'> & { limit?: number };
+export type StatsQuery = Omit<LicenceQuery, 'page' | 'page_size' | 'sort' | 'order' | 'fields'> & { limit?: number };
+
+/** Which daily lists are behind a response. The four documented keys always; the live API also sends the rest. */
+export interface Coverage {
+  reports_loaded: number;
+  missing_dates: string[];
+  failed_dates: string[];
+  parse_issue_count: number;
+  loaded_dates?: string[];
+  empty_dates?: string[];
+  retry_failed_dates?: string[];
+  parse_issues_by_date?: Record<string, number>;
+}
 
 export interface DataMeta {
   schema_version: 1;
@@ -84,17 +114,19 @@ export interface DataMeta {
   date_from: string | null;
   date_to: string | null;
   event_type: string;
-  coverage: { reports_loaded: number; missing_dates: string[]; failed_dates: string[]; parse_issue_count: number };
+  coverage: Coverage | null; // null when no dataset is loaded (contract, /ask stub)
 }
 
 /** GET /licences */
-export interface LicencePage {
-  items: LicenceEvent[];
+export interface Page<T> {
+  items: T[];
   total: number;
   page: number;
   page_size: number;
   meta: DataMeta;
 }
+export type LicencePage = Page<LicenceEvent>;
+export type PointPage = Page<LicencePoint>;
 
 /** GET /stats/daily, /stats/top-licensees, /stats/top-formations, /stats/substances */
 export interface Stats<T> {
@@ -112,7 +144,11 @@ export interface ApiError {
   schema_version: 1;
 }
 
-/** POST /ask { question } */
+/**
+ * POST /ask { question }. The M2 stub always refuses with ASK_UNAVAILABLE. Anubis said the M4
+ * success body will be {sql, rows, row_count, truncated, model}; ApiService.ask normalises
+ * that into this shape so the page only knows one.
+ */
 export type AskResponse =
-  | { status: 'ok'; columns: string[]; rows: Record<string, unknown>[]; sql: string; row_limit: number; truncated: boolean; refusal: null; meta: DataMeta }
-  | { status: 'refused'; columns: []; rows: []; sql: null; row_limit: number; truncated: false; refusal: { code: string; message: string }; meta: DataMeta };
+  | { status: 'ok'; columns: string[]; rows: Record<string, unknown>[]; sql: string; row_limit: number; truncated: boolean; refusal: null; meta: DataMeta | null; row_count?: number; model?: string }
+  | { status: 'refused'; columns: []; rows: []; sql: null; row_limit: number; truncated: false; refusal: { code: string; message: string }; meta: DataMeta | null };
