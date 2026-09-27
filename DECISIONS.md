@@ -2,7 +2,9 @@
 
 Dated, one per line, newest first. Why, not just what.
 
-- 2026-09-27: Historical source validation remains strict: January 11/16 truncated reports, July 9 malformed UWI and September 27 stale-year header are visible failed dates. Valid January-to-September data is prepared independently without replacing the live snapshot until hash, coverage and runtime capacity checks pass. The official July ZIP's one ST1/ wrapper is supported without arbitrary nested paths. (Tenjin; original SPEC backfill, retained source hashes)
+- 2026-09-27: Raise the API Lambda from 256 to 512 MiB after the real full-history warm refresh reached 251 MB. The old and replacement JSONL snapshots overlap in memory during refresh; keeping headroom is safer than operating five MB below the allocation. Timeout, quota, permissions and SQL limits are unchanged. (Tenjin; CloudWatch full-history-api-reports receipt)
+
+- 2026-09-27: Historical source validation remains strict: January 11/16 truncated reports, July 9 malformed UWI and September 27 stale-year header are visible failed dates. Valid January-to-September data was prepared independently and published only after hash, coverage and runtime capacity checks passed; the prior snapshot remains recoverable. The official July ZIP's one ST1/ wrapper is supported without arbitrary nested paths. (Tenjin; original SPEC backfill, retained source hashes)
 - 2026-09-27: Release evidence distinguishes the configured Python-only forge check from the combined local Python/web run. Anubis confirmed the owner-only setting limitation and permitted release with honest receipts; no combined forge pass is inferred. (Anubis; issue #1 #174)
 
 - 2026-09-27: M4 uses the approved DeepSeek `deepseek-chat` alias and reports the actual served model; the live provider currently serves it as `deepseek-flash`. The key is copied securely to one SSM SecureString, read only by the API application role, never included in a bundle or environment output. (Tenjin; issue #1 #164/#166)

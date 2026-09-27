@@ -6,8 +6,13 @@ storage figures retain their separate morning observation window.
 
 ## Current resources
 
-API Lambda: 256 MiB, 15 second timeout,Python3.13. Ingestion: 512 MiB, 180 seconds.
+API release configuration: 512 MiB, 15 second timeout, Python 3.13. Ingestion:
+512 MiB, 180 seconds. The pre-change API ran at 256 MiB; observed warm refresh
+of the full-history snapshot reached 251 MB, so the release raises its memory
+for refresh headroom. Post-update readback is recorded on issue #1.
 The first scheduled invocation used 127 MiB maximum and 2798 ms execution time.
+The later manual full-history ingestion (8,811 events) used 216 MB maximum and
+4243 ms, within its unchanged 512 MB/180-second allocation.
 CloudWatch's midnight-to-13:12 UTC window records 58 API calls and 3 ingest calls
 (two manual verification calls plus the scheduled call). These are development
 traffic, not a reliable prediction of public visitor demand.

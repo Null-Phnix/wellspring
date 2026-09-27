@@ -20,10 +20,11 @@ shares a 100-attempt daily allowance across the demo. Unsupported requests and
 unavailable services produce explicit refusals. See [the evidence record](docs/EVIDENCE.md)
 for deployed versions, checks and known limitations.
 
-The verified sample covers August 2026 and September through the latest published
-report. It is not the full January-to-current backlog. Coverage reports missing,
-failed, empty and loaded dates separately. A source that has not published yet
-must not be drawn as a zero-event day.
+The current backfill covers January 1 through September 27, 2026, with 266 valid
+report dates and 8,811 events. Four report dates failed strict source validation
+and remain explicit gaps. Coverage reports missing, failed, empty and loaded
+dates separately. A source that has not published yet must not be drawn as a
+zero-event day. See [the live query receipts](docs/ASK-RECEIPTS.md).
 
 ## Run locally in five commands
 

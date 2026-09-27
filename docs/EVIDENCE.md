@@ -9,7 +9,7 @@ are separate evidence. Scriptorium issue #1 contains the coordinated receipts.
 | M2 follow-ups | Changes #274 and #279 merged; unsupported DLS no longer rejects a valid report; generated contracts and points projection corrected | Structural/header-date errors remain fatal |
 | M3 frontend | Live dashboard, filtered licence table, map, Ask and About; 31 tests in 8 files and production build passed locally, also independently reproduced by Nabu | Unit tests do not prove every browser/device |
 | M4 Ask | Change #285 source 17e7e7a independently approved and forge-verified; merged main a4c337a deployed and configuration verified | Generated SQL can still misunderstand a question |
-| Current dataset | 57 loaded reports, August 1 to September 26: 2,100 events, 899 issued, 865 approximate positions, no failed dates | January to July backfill remains outside this snapshot; current-day unpublished data is not zero |
+| Current dataset | 266 loaded reports, January 1 to September 27 request: 8,811 events, 3,763 issued, 3,685 approximate positions | January 11/16, July 9 and September 27 fail source validation; gaps are not zeroes |
 | Scheduled intake | Actual Lambda start 13:00:44 UTC; normal END/REPORT and one invocation metric in that minute; manifest publication 13:00:46.971395 UTC | Later manual smoke calls are not scheduled-run evidence |
 | Coordinates | 77 government ATS references, 7 held out; 5 independently refetched; maximum observed sample error 1.201 km | Not a universal bound or surveyed wellhead position |
 | Access | Both buckets private; CloudFront-only public site access; narrow API secret/quota grants; scoped ingestion writes | Account administrator privileges were not exhaustively audited |
@@ -47,9 +47,9 @@ back after mirroring.
 - Site: https://d157m2vmtz6y3j.cloudfront.net/
 - API: https://yjzy2hz1z1.execute-api.ca-central-1.amazonaws.com
 - Stack: `wellspring-demo`, `ca-central-1`.
-- Verified backend source: `a4c337a168bbea8e5ee32fe03489e53c14c53793`.
+- Verified backend source: `e9ef5d21b27a29db96ac73041a304f4366843088`.
 - Both Lambda code packages matched SHA-256
-  `02ef2ace57a905ef60ac0663aedebe508a51b733062c1624f28495883f870a13`.
+  `abecaf7dfb23da1f9371734c557f3b935f115f0235cb7eaafc0e49d5d6853937`.
 - Ask enabled state, provider/model/key reference/daily limit and actual API
   environment were read back. Only the secret reference is an environment value.
 - Daily schedule restored and read back as ENABLED, `cron(0 7 * * ? *)`,
@@ -65,10 +65,13 @@ scheduled morning run, AER supplied a valid 2026 empty report. The local cache
 now revalidates/refetches stale content and retains rejected bytes by hash.
 This source-date failure was separate from the unsupported-DLS parser defect.
 
-A later manual M4 ingestion smoke retained all 2,100 events and retried September
-24 to 26 successfully. Its publication time is not the last scheduled-run time.
+A later manual full-history ingestion smoke retained all 8,811 events and
+retried September 24 to 26 successfully, using 216 MB of 512 MB and 4.243 seconds.
+Its manifest publication was 17:10:32.053070 UTC. This is separate from the last
+actual scheduled run at 13:00:44 UTC, which processed the then-current 2,100-event
+snapshot. The schedule was restored and verified ENABLED after deployment.
 
-## Real Ask acceptance
+## Initial M4 Ask acceptance (August to September snapshot)
 
 The three responses were independently compared with Python counts from the
 hash-verified snapshot, rather than checked only for HTTP 200. Snapshot SHA-256:
@@ -90,17 +93,19 @@ A requested DROP TABLE returned READ_ONLY_REQUIRED, no SQL and no rows. The
 counter was 4 after these attempts and 5 after a separate browser query returned
 899 issued events with inspectable SQL and no captured console errors.
 
-## Wider historical snapshot prepared for publication
+## Wider historical snapshot deployed
 
-The original January-to-current scope was fetched and parsed in isolation.
-The candidate includes 266 valid report dates, 37 empty dates, 8,811 events and
+The original January-to-current scope was fetched and parsed in isolation, then
+reviewed and published after change #289 merged. The live snapshot includes 266 valid report dates, 37 empty dates, 8,811 events and
 11,324 occurrences. Counts: 3,763 issued, 1,113 amended, 3,469 updated and 466
 cancelled. The export is 18,501,272 bytes, SHA-256
 `89656c14cb785a92200680590a4bfe6f406bad8821573138c72c3c060ec8f2e6`.
 All original 2,100 event IDs remain present. Owner checks re-read every usable
 report header/hash, all eight archive layouts and SQLite integrity. API loading
 plus grouped SQL ran locally in 0.284 seconds at 134.4 MiB peak RSS. That is local
-capacity evidence, not measured Lambda memory.
+capacity evidence. Live Lambda reports subsequently measured 213 MB cold and
+251 MB on a warm snapshot refresh, triggering the release configuration increase
+to 512 MiB. Runtime readback after that change is recorded separately.
 
 January 11 and 16 lack an end marker; July 9 contains a literal `/---W/` UWI in
 an amendment. Independent owner downloads from the rolling daily endpoints
@@ -109,8 +114,13 @@ September 27 still serves a 2025 header. All four remain failed dates, not zeroe
 or silently accepted partial days. No validation rule was weakened to fill them.
 July's official ZIP uses `ST1/`; the shared reader now supports that exact wrapper
 while preserving limits and path/duplicate rejection. Raw source archives and
-individual reports remain in the isolated output. This candidate is not called
-live until its publication and API readback are recorded.
+individual reports are retained locally and in the private data bucket under
+raw/backfill-2026/. The API readback confirms 8,811 events and 266 valid dates.
+Repeated live Ask checks returned the same August top five and September GAS
+counts, plus 38 weekly rows across the expanded dataset. All matched independent
+counts, with no truncation, in 8.271/1.699/1.759 seconds. DROP was refused again.
+The shared counter read 26/100 at 17:10 UTC, including other live callers. Full
+questions, SQL and answers are in [ASK-RECEIPTS.md](ASK-RECEIPTS.md).
 
 ## Release procedure and known limits
 
@@ -124,7 +134,7 @@ the tag, verify private visibility and matching hashes, and record the final
 URLs and receipts on issue #1. No tag or mirror completion is implied by this
 pre-release document.
 
-Limitations: partial historical coverage in the current snapshot; approximate
+Limitations: four explicit source-validation gaps in historical coverage; approximate
 and sometimes absent coordinates; preliminary/revisable source data; a shared
 100-attempt UTC-day Ask quota; 200 returned rows and a ten-second wall budget;
 model-generated SQL may misunderstand requests; no user accounts or production
@@ -134,7 +144,9 @@ independent educational demo, not an AER or GeoLOGIC product.
 Raw runtime receipts remain outside Git under `output/deployment/`, including
 `verified-deployment.json`, `scheduled-ingest-morning.json`,
 `m4-ingest-smoke.json`, `m4-access-audit.json`, `m4-schedule-counter.json`,
-`ask-real-receipts.json`, and `cloudfront-morning.json`. The concise evidence and
+`ask-real-receipts.json`, `full-history-ask-receipts.json`,
+`full-history-api-readback.json`, `full-history-ingest-invoke.json`,
+`full-history-schedule.json`, and `cloudfront-morning.json`. The concise evidence and
 reproduction instructions are retained in Git and the forge Chronicle.
 
 See [M1 detail](M1-EVIDENCE.md), [M2 detail](M2-EVIDENCE.md),

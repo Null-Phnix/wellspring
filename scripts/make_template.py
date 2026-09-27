@@ -57,6 +57,9 @@ r['ApiFunction']['Properties']['Environment']['Variables'].update({
     'ASK_PROVIDER_URL':ref('AskProviderUrl'),'ASK_MODEL':ref('AskModel'),
     'ASK_DAILY_LIMIT':{'Fn::Sub':'${AskDailyLimit}'},
 })
+# A full January-to-current snapshot peaked at 251 MB during a warm refresh
+# in the 256 MB API allocation. Keep headroom for the old and new snapshots.
+r['ApiFunction']['Properties']['MemorySize']=512
 t['Outputs']['AskQuotaTable']={'Value':ref('AskQuotaTable')}
 t['Outputs']['AskEnabled']={'Value':ref('AskEnabled')}
 t['Outputs']['AskModel']={'Value':ref('AskModel')}

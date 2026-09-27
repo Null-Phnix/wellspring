@@ -343,7 +343,7 @@
             "Arn"
           ]
         },
-        "MemorySize": 256,
+        "MemorySize": 512,
         "Timeout": 15,
         "Handler": {
           "Fn::If": [
