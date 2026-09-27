@@ -7,7 +7,8 @@ import { DlsPipe } from '../dls.pipe';
 const COLOURS: Record<string, string> = { 'CRUDE BITUMEN': '#b45309', 'CRUDE OIL': '#15803d', 'GAS': '#1d4ed8', 'WATER': '#0e7490' };
 const OTHER = '#6b7280';
 const ESC: Record<string, string> = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' };
-const MAX_PAGES = 5; // ponytail: 5 x 200 points; ask Tenjin for a slim /licences points view if 30 days exceeds 1000
+const PAGE_SIZE = 200; // contract cap on page_size
+const MAX_PAGES = 5; // ponytail: 1000 newest events; Tenjin's M2 contract may add a slim points projection (issue #1 comment 125)
 
 @Component({
   selector: 'app-map',
@@ -21,7 +22,13 @@ const MAX_PAGES = 5; // ponytail: 5 x 200 points; ask Tenjin for a slim /licence
     <p class="legend">
       @for (e of legend; track e[0]) { <span><i [style.background]="e[1]"></i>{{ e[0] }}</span> }
       <span><i [style.background]="other"></i>Other</span>
-      @if (data.value(); as v) { <span class="muted">{{ v.plotted }} of {{ v.total }} plotted; the rest have no coordinates yet</span> }
+      @if (data.value(); as v) {
+        <span class="muted">
+          {{ v.plotted }} of {{ v.loaded }} loaded events plotted; {{ v.total }} issued in the window.
+          @if (v.capped) { Loading is capped at {{ cap }} events, newest first. }
+          Unplotted events have no coordinates yet.
+        </span>
+      }
     </p>
   `,
 })
@@ -32,16 +39,17 @@ export class MapPage {
   private readonly dls = new DlsPipe();
   readonly legend = Object.entries(COLOURS);
   readonly other = OTHER;
+  readonly cap = PAGE_SIZE * MAX_PAGES;
 
   readonly data = resource({
     loader: async () => {
-      const q = { date_from: isoDaysAgo(30), date_to: isoDaysAgo(0), page_size: 200 };
+      const q = { date_from: isoDaysAgo(30), date_to: isoDaysAgo(0), page_size: PAGE_SIZE };
       const first = await this.api.licences({ ...q, page: 1 });
       const items = [...first.items];
       const pages = Math.min(MAX_PAGES, Math.ceil(first.total / first.page_size));
       for (let p = 2; p <= pages; p++) items.push(...(await this.api.licences({ ...q, page: p })).items);
       const plottable = items.filter(r => r.latitude != null && r.longitude != null);
-      return { items: plottable, plotted: plottable.length, total: first.total };
+      return { items: plottable, plotted: plottable.length, loaded: items.length, total: first.total, capped: first.total > items.length };
     },
   });
 
