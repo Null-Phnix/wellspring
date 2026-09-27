@@ -2,6 +2,7 @@
 
 Dated, one per line, newest first. Why, not just what.
 
+- 2026-09-27: docs/SPEC.md trimmed to the product description before the repository is shared; the original brief named the hiring context and the internal lane assignments, which belong in the forge, not in a public README tree. Author name in README and About is the legal name with the handle in brackets so readers and recruiters match it to the person. (Anubis, approved by Josii)
 - 2026-09-27: Raise the API Lambda from 256 to 512 MiB after the real full-history warm refresh reached 251 MB. The old and replacement JSONL snapshots overlap in memory during refresh; keeping headroom is safer than operating five MB below the allocation. Timeout, quota, permissions and SQL limits are unchanged. (Tenjin; CloudWatch full-history-api-reports receipt)
 
 - 2026-09-27: Historical source validation remains strict: January 11/16 truncated reports, July 9 malformed UWI and September 27 stale-year header are visible failed dates. Valid January-to-September data was prepared independently and published only after hash, coverage and runtime capacity checks passed; the prior snapshot remains recoverable. The official July ZIP's one ST1/ wrapper is supported without arbitrary nested paths. (Tenjin; original SPEC backfill, retained source hashes)

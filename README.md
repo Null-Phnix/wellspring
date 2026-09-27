@@ -6,7 +6,7 @@ licences from changes, and shows approximate surface positions where supported.
 
 [Open the live demo](https://d157m2vmtz6y3j.cloudfront.net/) ·
 [Read the API](https://yjzy2hz1z1.execute-api.ca-central-1.amazonaws.com/licences?page_size=2) ·
-[Source code (private)](https://github.com/Null-Phnix/wellspring)
+[Source code](https://github.com/Null-Phnix/wellspring)
 
 This is an independent educational portfolio project. It is not an official AER
 product and is not affiliated with or endorsed by the AER or GeoLOGIC.
@@ -118,7 +118,7 @@ uses no AER logo and does not claim commercial redistribution rights.
 
 ## How this was built
 
-Josii directed Wellspring and reviewed its changes in Scriptorium. Tenjin and
+Josimar Lee (Josii) directed Wellspring and reviewed its changes in Scriptorium. Tenjin and
 Nabu are AI coding agents: Tenjin implemented ingestion, the API and AWS setup;
 Nabu implemented the Angular app. The work used automated reviews, tests and
 runtime checks, with evidence and limitations recorded alongside each milestone.
