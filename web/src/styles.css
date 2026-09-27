@@ -64,3 +64,9 @@ ul.problems { margin: 0 0 .5rem; padding-left: 1.2rem; font-size: .9rem; }
 .legend { display: flex; gap: 1rem; flex-wrap: wrap; font-size: .85rem; }
 .legend i { display: inline-block; width: .8rem; height: .8rem; border-radius: 50%; margin-right: .35rem; vertical-align: -1px; }
 pre { background: #f3f4f6; padding: .75rem; overflow-x: auto; border-radius: 4px; }
+.chips { display: flex; gap: .5rem; flex-wrap: wrap; }
+button.chip { background: #eef2ff; color: #1e3a8a; border-color: #c7d2fe; border-radius: 999px; font-size: .85rem; text-align: left; }
+button.chip:hover, button.chip:focus-visible { background: #e0e7ff; }
+.badge { display: inline-block; background: #fef3c7; color: #92400e; border-radius: 999px; padding: 0 .5rem; font-size: .75rem; font-weight: 600; margin-left: .5rem; vertical-align: middle; }
+.notice { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e3a8a; padding: .75rem 1rem; border-radius: 6px; }
+h2 .muted { font-weight: 400; font-size: .85rem; margin-left: .5rem; }
