@@ -5,13 +5,16 @@
     <a routerLink="/licences" routerLinkActive="active">Licences</a>
     <a routerLink="/map" routerLinkActive="active">Map</a>
     <a routerLink="/ask" routerLinkActive="active">Ask</a>
+    <a routerLink="/about" routerLinkActive="active">About</a>
   </nav>
 </header>
 <main>
   <router-outlet />
 </main>
 <footer>
-  Data: Alberta Energy Regulator, ST1 Well Licences Issued Daily
-  (<a href="https://www.aer.ca/providing-information/data-and-reports/statistical-reports/st1">AER ST1</a>).
-  Map positions are approximate. Wellspring is an independent portfolio project and is not affiliated with the AER.
+  Data: <a [href]="aer" rel="noopener">Alberta Energy Regulator, ST1 Well Licences Issued Daily</a>.
+  Positions approximate.
+  @if (api.dataAsOf(); as asOf) { Data as of {{ asOf | date: 'yyyy-MM-dd HH:mm' : 'UTC' }} UTC. }
+  <a [href]="repo" rel="noopener">Source code</a>.
+  Wellspring is an independent portfolio project and is not affiliated with the AER.
 </footer>
