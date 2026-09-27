@@ -94,3 +94,37 @@ Deleting the owned stack removes the API, functions and distribution, but both
 buckets are retained to preserve source data. Their contents may continue to
 incur small storage charges. Bucket deletion is a separate explicit cleanup,
 not an automatic side effect of rollback. Do not delete unrelated AWS resources.
+
+
+## Enable the approved Ask provider
+
+The deployment source is the owner-authorized DEEPSEEK_API_KEY in the local
+Hermes environment file. `scripts/configure_provider.py` copies only that value
+to `/wellspring/ask/provider_key` as a Standard SSM SecureString. On this Linux
+host the AWS wrapper consumes stdin, so the helper uses an inherited anonymous
+in-memory descriptor instead. The value never appears in argv, a disk artifact,
+stdout, the template or the Lambda code ZIP. Only safe parameter/version metadata
+is printed. The configured local source remains the owner-managed source of truth.
+
+After source checks and review, and with the ingestion schedule disabled:
+
+```bash
+python3 scripts/configure_provider.py
+python3 scripts/deploy.py publish --data output/published --enable-ask
+python3 scripts/deploy.py status
+python3 scripts/deploy.py verify
+```
+
+`--enable-ask` verifies that the configured parameter exists as a SecureString
+before enabling the API's parameter reference. Existing Ask parameters are
+preserved when only the ingestion schedule changes. Plain template parameters
+select the approved provider URL and model; secret values are never parameters.
+The API role gains GetParameter on that one name and UpdateItem on one quota
+table, restricted to ASK# keys. The table uses on-demand billing, encryption,
+and a two-day TTL. The cap is a demo operating limit, separate from AWS Budgets.
+Its counters are retained if the stack is removed; they naturally expire.
+
+The scheduled-ingestion and read-only licence API permissions are unchanged.
+Only the API application role is granted the secret read; deployment/account
+administrators may retain management permissions. This is not a claim that
+the AWS account owner can be denied access to its own secret.

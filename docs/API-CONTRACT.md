@@ -142,26 +142,50 @@ when it is listed in comma-separated `ALLOWED_ORIGINS` (development default:
 Its allow-methods value is `GET, POST, OPTIONS` and allow-headers is
 `content-type`.
 
-## Ask (M2 refusal stub)
+## Ask (M4)
 
-`POST /ask {question:string}` returns either:
+`POST /ask {question:string}` accepts a question of at most 1,200 characters.
+The provider receives that question and the fixed public `events` schema only.
+It does not receive credentials, source files or database access. The configured
+DeepSeek alias is `deepseek-chat`; the API reports the provider's actual served
+model, currently `deepseek-flash` for that alias.
+
+Success:
 
 ```json
-{"status":"ok","columns":[],"rows":[],"sql":"SELECT ...","row_limit":200,"truncated":false,"refusal":null,"meta":{}}
+{"status":"ok","sql":"SELECT ...","columns":["licensee","count"],"rows":[],"row_count":0,"truncated":false,"model":"deepseek-flash","row_limit":200,"refusal":null,"meta":{}}
 ```
 
-or
+Refusal:
 
 ```json
-{"status":"refused","columns":[],"rows":[],"sql":null,"row_limit":200,"truncated":false,"refusal":{"code":"ASK_UNAVAILABLE","message":"Question answering is not available in this release."},"meta":{}}
+{"status":"refused","sql":null,"columns":[],"rows":[],"row_count":0,"truncated":false,"model":null,"row_limit":200,"refusal":{"code":"ASK_UNAVAILABLE","message":"Question answering is temporarily unavailable."},"meta":{}}
 ```
 
-M2 always returns the unavailable refusal shape above for `POST /ask`, regardless
-of body. Its `meta` is the full shared metadata from the loaded dataset when
-available; otherwise every dataset-specific field is null and `coverage` is null.
-There is no model call, SQL generation, SQL execution, or database connection.
-The M4 proposal must separately specify an authorizer, single-statement and
-table allowlist checks plus row/time limits before this contract changes.
+`meta` is the full shared metadata when the dataset is available, otherwise the
+full shape with null dataset fields. The existing status discriminator and
+columns/rows/sql/refusal fields remain compatible with Nabu's renderer. Missing
+provider configuration, unavailable secret/counter/provider and exhausted daily
+quota return `ASK_UNAVAILABLE`. Other safe refusals include `INVALID_QUESTION`,
+`READ_ONLY_REQUIRED`, `UNSAFE_QUERY`, `INVALID_SQL`, `QUERY_TIMEOUT`,
+`QUERY_UNAVAILABLE` and `RESULT_LIMIT`. The frontend displays the returned code
+and message rather than inventing an answer.
+
+A model attempt requires one atomic daily-counter increment first. The shared
+demo cap defaults to 100 attempts per UTC day; failed provider attempts are not
+refunded. The counter stores a date key, count and expiry only, never prompts
+or IPs. A counter error fails closed without calling the model. The model key is
+read from one SSM SecureString by the API role and cached in process for at most
+five minutes. It is not a Lambda environment value or a repository artifact.
+
+Generated SQL is untrusted. It runs against a separate public-data snapshot,
+reopened in immutable read-only mode with query_only, an authorizer and SQLite
+limits. Only one SELECT in the documented subset is accepted. Output is capped
+at 200 rows, with a 201st row indicating truncation. The request uses one
+absolute deadline throughout data loading, secret/quota reads, the model call,
+snapshot creation and execution. A 9.5-second process alarm leaves encoding and
+runtime overhead within the ten-second wall budget. Logs contain status,
+duration, row count and served model only. See [the SQL boundary](ASK-SAFETY.md).
 
 ## Frontend coordination
 

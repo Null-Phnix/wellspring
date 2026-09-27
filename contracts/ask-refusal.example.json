@@ -2,12 +2,14 @@
   "status": "refused",
   "columns": [],
   "rows": [],
+  "row_count": 0,
+  "model": null,
   "sql": null,
   "row_limit": 200,
   "truncated": false,
   "refusal": {
     "code": "ASK_UNAVAILABLE",
-    "message": "Question answering is not available in this release."
+    "message": "Question answering is temporarily unavailable."
   },
   "meta": {
     "schema_version": 1,

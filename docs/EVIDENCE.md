@@ -65,3 +65,23 @@ are preserved here and in the Scriptorium task Chronicle.
 
 See [M1 detail](M1-EVIDENCE.md), [M2 detail](M2-EVIDENCE.md),
 [DLS references](DLS.md) and [deployment/recovery](DEPLOYMENT.md).
+
+
+## Afternoon M4 source validation
+
+The earlier provider and merge blockers were resolved by the owner. The approved
+DeepSeek key was copied to one SSM SecureString without printing its value or
+storing it in source/bundles/command arguments. The requested `deepseek-chat`
+alias is accepted by the authenticated provider and currently reports
+`deepseek-flash` as its served model. A bounded authentication probe returned
+`SELECT 1;` in 0.735 seconds using 23 tokens. This probe is not one of the required
+post-deployment business-query receipts.
+
+M4 implements the read-only SQLite boundary, one shared deadline, 200-row cap,
+provider refusal handling, secret read and atomic 100-attempt daily quota.
+The source was checked with the integrated backend suite and 31 frontend tests
+plus a production build. An independent local integration review found three
+issues (unverified/unsafe provider model metadata and incomplete enabled-state
+deployment verification); they were fixed and rechecked. Exact counts and source
+SHAs are recorded in the task Chronicle. Live M4 deployment and the three real
+question receipts still require their own evidence before release.

@@ -165,7 +165,7 @@ def test_ask_refusal_is_truthful_without_a_dataset(monkeypatch):
     handler.reset_dataset_cache()
     response, body = call("/ask", method="POST")
     assert response["statusCode"] == 200
-    assert body["refusal"] == {"code": "ASK_UNAVAILABLE", "message": "Question answering is not available in this release."}
+    assert body["refusal"] == {"code": "ASK_UNAVAILABLE", "message": "Question answering is temporarily unavailable."}
     assert body["meta"] == {"schema_version": 1, "data_as_of": None, "date_from": None, "date_to": None, "event_type": None, "coverage": None}
 
 
