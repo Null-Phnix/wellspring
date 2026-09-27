@@ -16,11 +16,11 @@ export const AER_ST1_URL = 'https://www.aer.ca/providing-information/data-and-re
 
     <h2>How this was built</h2>
     <p>
-      Josii designed and directed Wellspring and reviewed the code; implementation by AI coding agents under his
-      review: Tenjin implemented ingestion, the API and AWS setup; Nabu implemented the Angular app. The work used
-      automated reviews, tests and runtime checks, with evidence and limitations recorded alongside each milestone.
-      Data comes from the Alberta Energy Regulator's public ST1 Well Licences Issued Daily reports. Map positions are
-      approximate, derived from legal land descriptions with the township grid method.
+      Josii directed Wellspring and reviewed its changes in Scriptorium. Tenjin and Nabu are AI coding agents: Tenjin
+      implemented ingestion, the API and AWS setup; Nabu implemented the Angular app. The work used automated reviews,
+      tests and runtime checks, with evidence and limitations recorded alongside each milestone. Data comes from the
+      Alberta Energy Regulator's public ST1 Well Licences Issued Daily reports. Map positions are approximate, derived
+      from legal land descriptions with the township grid method.
     </p>
 
     <h2>The pages</h2>

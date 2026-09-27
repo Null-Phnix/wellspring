@@ -33,6 +33,8 @@ describe('AskPage', () => {
     expect(el.querySelectorAll('tbody tr').length).toBe(1);
     expect(el.querySelector('.badge')?.textContent).toContain('truncated at 200');
     expect(el.textContent).toContain('answered by small');
+    expect(el.querySelector('.table-wrap table')).not.toBeNull();
+    expect(el.querySelector('textarea')?.getAttribute('aria-label')).toBe('Your question');
   });
 
   it('renders ASK_UNAVAILABLE as a calm notice with the message verbatim', async () => {

@@ -20,7 +20,7 @@ export const EXAMPLES = [
       @for (q of examples; track q) { <button type="button" class="chip" (click)="ask(q)">{{ q }}</button> }
     </p>
     <form (submit)="submit($event)">
-      <textarea #box name="question" rows="3" required [placeholder]="examples[0]"></textarea>
+      <textarea #box name="question" rows="3" required aria-label="Your question" [placeholder]="examples[0]"></textarea>
       <button [disabled]="busy()">{{ busy() ? 'Asking…' : 'Ask' }}</button>
     </form>
 
@@ -35,6 +35,7 @@ export const EXAMPLES = [
           @if (a.truncated) { <span class="badge">truncated at {{ a.row_limit }} rows</span> }
           @if (a.model) { <span class="muted">answered by {{ a.model }}</span> }
         </h2>
+        <div class="table-wrap">
         <table>
           <thead><tr>@for (c of a.columns; track c) { <th scope="col">{{ c }}</th> }</tr></thead>
           <tbody>
@@ -45,6 +46,7 @@ export const EXAMPLES = [
             }
           </tbody>
         </table>
+        </div>
       } @else if (a.refusal.code === 'ASK_UNAVAILABLE') {
         <p class="notice" role="status">{{ a.refusal.message }} This part of Wellspring is not switched on yet; the rest of the site works without it.</p>
       } @else {
