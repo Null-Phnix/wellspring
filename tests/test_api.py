@@ -209,3 +209,16 @@ def test_retry_failures_and_parse_counts_are_window_scoped():
     result=_coverage_for_window(coverage,'2026-08-01','2026-08-31')
     assert result['retry_failed_dates']==['2026-08-01']
     assert result['parse_issue_count']==0
+
+
+def test_points_keep_surface_location_text_and_explicit_missing_value(monkeypatch):
+    records = [
+        _record("located", surface_location="16-12-066-03W4"),
+        _record("missing", surface_location=None),
+    ]
+    monkeypatch.setattr(handler, "_dataset", lambda: handler.Dataset(records, {}))
+    response, body = call("/licences", query={"fields": "points"})
+    assert response["statusCode"] == 200
+    by_id = {row["id"]: row for row in body["items"]}
+    assert by_id["located"]["surface_location"] == "16-12-066-03W4"
+    assert by_id["missing"]["surface_location"] is None

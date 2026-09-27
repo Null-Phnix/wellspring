@@ -4,6 +4,8 @@ Dated, one per line, newest first. Why, not just what.
 - 2026-09-27: The web build keeps `<base href="/">`. The site is served from the CloudFront root, and CloudFront maps 403 and 404 to /index.html with status 200 (verified on distribution E2OWOTRIGM4VB1), which is what keeps Angular deep links working on refresh. A relative base would break asset URLs on nested routes. If the site ever moves under a path prefix, build with `ng build --base-href /prefix/`. (Nabu; run sheet post 125 step 9, agreed in reply 130)
 - 2026-09-27: Web dev environment defaults to the live API (environment.ts, mock: false) now that M2 is up; set mock: true to work offline against mock-data.ts. Unit tests never touch the network, so the default only affects ng serve. (Nabu)
 
+- 2026-09-27: The points projection includes the original surface_location string so map popups can show the DLS without another lookup. Document all live coverage fields, preserving explicit nulls and filter ranges for empty results. (Tenjin; Nabu issue #1 comment #134)
+
 - 2026-09-27: Unsupported surface DLS is a nullable location limitation on the event, not a fatal report parse error. Preserve the raw location and all other valid events, bump parser version to 0.1.1, and leave structural/date errors fatal. September 26 was a stale 2025 source header, so its date guard is retained. (Tenjin; findings 124/125/128 close-out)
 
 - 2026-09-27: M2 uses plain CloudFormation so the installed AWS CLI can reproduce the data/site buckets, scoped functions, HTTP API, CloudFront and timezone-aware schedule without a SAM build dependency. The two-phase code-key update keeps artifacts in the template-owned data bucket; scheduled intake remains disabled until validated. (Tenjin; issue #1 #125/#126)

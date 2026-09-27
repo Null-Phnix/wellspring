@@ -78,7 +78,7 @@ client should not assume full-text search.
 projecting each item to exactly:
 `id`, `licence_number`, `well_name`, `licensee`, `substance`, `report_date`,
 `latitude`, `longitude`, `coordinate_method`, `location_accuracy`, and
-`location_reason`. Every projection key is present; unreported values are null.
+`location_reason`, and `surface_location`. Every projection key is present; unreported values are null.
 No other `fields` value is accepted.
 
 ## Statistics
@@ -111,10 +111,14 @@ as such; it is not a full-database export.
   "schema_version": 1,
   "data_as_of": null,
   "date_from": "2026-08-01",
-  "date_to": "2026-08-31",
+  "date_to": "2026-08-02",
   "event_type": "issued",
   "coverage": {
-    "reports_loaded": 31,
+    "reports_loaded": 2,
+    "loaded_dates": ["2026-08-01", "2026-08-02"],
+    "empty_dates": ["2026-08-02"],
+    "retry_failed_dates": [],
+    "parse_issues_by_date": {},
     "missing_dates": [],
     "failed_dates": [],
     "parse_issue_count": 0
@@ -123,7 +127,8 @@ as such; it is not a full-database export.
 ```
 
 `data_as_of` is an ISO timestamp from the manifest or null; the date endpoints
-are null for an empty filtered result. General errors are
+are null only when there is no requested or declared dataset range. An empty
+filtered result retains its requested range. General errors are
 `{error:{code,message},schema_version:1}`.
 
 Every successful data response includes this `meta` shape. `date_from` and
