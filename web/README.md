@@ -22,6 +22,14 @@ The response shapes the app expects live in `src/app/api/types.ts` and mirror th
 - Map: Leaflet, surface locations coloured by substance, popup per record, positions labelled approximate.
 - Ask: plain-English question, the SQL the model wrote, rows or the refusal.
 
-## Deploy notes
+## Deploy
 
-Angular routes are client-side. CloudFront needs custom error responses mapping 403 and 404 to `/index.html` with status 200 (Tenjin's template). Upload the contents of `dist/web/browser`.
+Live at https://d157m2vmtz6y3j.cloudfront.net (CloudFront distribution `E2OWOTRIGM4VB1`, site bucket `wellspring-demo-sitebucket-qepuhrtijij0`, region ca-central-1). The build keeps `<base href="/">`; CloudFront maps 403 and 404 to `/index.html` with status 200, which is what keeps deep links working on refresh (see DECISIONS.md).
+
+From the repository root, after `npm run build` in `web/` (the AWS wrapper reads the owner's credentials inside the process and never prints them):
+
+    python3 scripts/aws_task.py s3 sync web/dist/web/browser s3://wellspring-demo-sitebucket-qepuhrtijij0 --cache-control 'public,max-age=31536000,immutable' --exclude index.html --only-show-errors
+    python3 scripts/aws_task.py s3 cp web/dist/web/browser/index.html s3://wellspring-demo-sitebucket-qepuhrtijij0/index.html --cache-control no-cache --content-type text/html --only-show-errors
+    python3 scripts/aws_task.py cloudfront create-invalidation --distribution-id E2OWOTRIGM4VB1 --paths '/*'
+
+Hashed assets are immutable and kept (no `--delete`), so clients mid-session keep working during a rollout; only `index.html` is uncached. Screenshots of the live pages are in `../docs/screenshots/`.
