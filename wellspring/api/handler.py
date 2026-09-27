@@ -88,11 +88,7 @@ def lambda_handler(event: dict[str, Any], context: Any) -> dict[str, Any]:
 
     try:
         if path == "/ask":
-            try:
-                dataset = _dataset()
-            except DatasetUnavailable:
-                return _response(200, _ask_refusal(None), cors)
-            return _response(200, _ask_refusal(dataset), cors)
+            return _response(200, _ask(event), cors)
         dataset = _dataset()
         if path == "/licences":
             return _licences(dataset, query, cors)
@@ -490,12 +486,43 @@ def _top(dataset: Dataset, query: dict[str, str], cors: dict[str, str], field: s
     return _response(200, {"items": [{output_key: value, "count": count} for value, count in ordered], "meta": meta}, cors)
 
 
-def _ask_refusal(dataset: Dataset | None) -> dict[str, Any]:
+def _ask(event):
+    from . import ask
+    from .query import QueryRefusal
+    started = time.monotonic()
+    deadline = started + ask.WALL_SECONDS
+    dataset = None
+    result = None
+    try:
+        with ask.hard_deadline(deadline):
+            dataset = _dataset()
+            if not ask.configured():
+                candidate = _ask_refusal(dataset)
+            else:
+                candidate = ask.answer(event, dataset.records, deadline,
+                    date_range=(dataset.manifest.get("date_from"), dataset.manifest.get("date_to")))
+                candidate["meta"] = _meta(dataset, [], None, None, "all")
+        result = candidate
+    except (ask.AskRefusal, QueryRefusal) as exc:
+        result = _ask_refusal(dataset, exc.code, exc.message)
+    except DatasetUnavailable:
+        result = _ask_refusal(None)
+    except Exception:
+        result = _ask_refusal(dataset)
+    # Bounded operational metadata only; no question, SQL, key or provider body.
+    print(json.dumps({"event": "ask", "status": result["status"],
+                      "duration_ms": round((time.monotonic() - started) * 1000),
+                      "row_count": result.get("row_count", 0),
+                      "model": result.get("model")}))
+    return result
+
+
+def _ask_refusal(dataset: Dataset | None, code="ASK_UNAVAILABLE", message="Question answering is temporarily unavailable.") -> dict[str, Any]:
     meta = _meta(dataset, [], None, None, "all") if dataset is not None else _null_meta()
     return {
-        "status": "refused", "columns": [], "rows": [], "sql": None, "row_limit": 200,
+        "status": "refused", "columns": [], "rows": [], "row_count": 0, "model": None, "sql": None, "row_limit": 200,
         "truncated": False,
-        "refusal": {"code": "ASK_UNAVAILABLE", "message": "Question answering is not available in this release."},
+        "refusal": {"code": code, "message": message},
         "meta": meta,
     }
 

@@ -27,4 +27,38 @@ r['ApiInvoke']={'Type':'AWS::Lambda::Permission','Properties':{'FunctionName':re
 r['ScheduleRole']={'Type':'AWS::IAM::Role','Properties':{'AssumeRolePolicyDocument':trust('scheduler.amazonaws.com'),'Policies':[{'PolicyName':'invoke-ingestion','PolicyDocument':policy([{'Effect':'Allow','Action':'lambda:InvokeFunction','Resource':att('IngestFunction','Arn')}])}]}}
 r['DailySchedule']={'Type':'AWS::Scheduler::Schedule','Properties':{'Description':'Public AER ST1 intake at 07:00 Mountain including daylight saving time','State':ref('ScheduleState'),'ScheduleExpression':'cron(0 7 * * ? *)','ScheduleExpressionTimezone':'America/Edmonton','FlexibleTimeWindow':{'Mode':'OFF'},'Target':{'Arn':att('IngestFunction','Arn'),'RoleArn':att('ScheduleRole','Arn'),'Input':'{}','RetryPolicy':{'MaximumRetryAttempts':1,'MaximumEventAgeInSeconds':3600}}}}
 t={'AWSTemplateFormatVersion':'2010-09-09','Description':'Wellspring public demo: private source buckets, scoped read-only API, static frontend and daily ST1 intake.','Parameters':{'CodeKey':{'Type':'String','Default':''},'ScheduleState':{'Type':'String','Default':'DISABLED','AllowedValues':['ENABLED','DISABLED']}},'Conditions':{'HasCode':{'Fn::Not':[{'Fn::Equals':[ref('CodeKey'),'']}]}},'Resources':r,'Outputs':{'DataBucket':{'Value':ref('DataBucket')},'SiteBucket':{'Value':ref('SiteBucket')},'ApiUrl':{'Value':att('HttpApi','ApiEndpoint')},'CloudFrontDomain':{'Value':att('Distribution','DomainName')},'ApiFunction':{'Value':ref('ApiFunction')},'IngestFunction':{'Value':ref('IngestFunction')}}}
+# M4: encrypted provider reference and one anonymous daily quota row.
+t['Parameters'].update({
+    'AskEnabled': {'Type':'String','Default':'false','AllowedValues':['true','false']},
+    'AskProviderUrl': {'Type':'String','Default':'https://api.deepseek.com','AllowedValues':['https://api.deepseek.com']},
+    'AskModel': {'Type':'String','Default':'deepseek-chat','AllowedValues':['deepseek-chat']},
+    'AskKeyParameter': {'Type':'String','Default':'/wellspring/ask/provider_key','AllowedValues':['/wellspring/ask/provider_key']},
+    'AskDailyLimit': {'Type':'Number','Default':100,'MinValue':1,'MaxValue':1000},
+})
+t['Conditions']['AskEnabledCondition']={'Fn::Equals':[ref('AskEnabled'),'true']}
+r['AskQuotaTable']={
+    'Type':'AWS::DynamoDB::Table','DeletionPolicy':'Retain','UpdateReplacePolicy':'Retain',
+    'Properties':{'BillingMode':'PAY_PER_REQUEST',
+        'AttributeDefinitions':[{'AttributeName':'quota_key','AttributeType':'S'}],
+        'KeySchema':[{'AttributeName':'quota_key','KeyType':'HASH'}],
+        'TimeToLiveSpecification':{'AttributeName':'expires_at','Enabled':True},
+        'SSESpecification':{'SSEEnabled':True}}}
+r['ApiRole']['Properties']['Policies'].append({
+    'PolicyName':'ask-secret-and-quota',
+    'PolicyDocument':policy([
+        {'Effect':'Allow','Action':['ssm:GetParameter'],
+         'Resource':sub('arn:${AWS::Partition}:ssm:${AWS::Region}:${AWS::AccountId}:parameter${AskKeyParameter}')},
+        {'Effect':'Allow','Action':['dynamodb:UpdateItem'],'Resource':att('AskQuotaTable','Arn'),
+         'Condition':{'ForAllValues:StringLike':{'dynamodb:LeadingKeys':['ASK#*']}}},
+    ])})
+r['ApiFunction']['Properties']['Environment']['Variables'].update({
+    'ASK_KEY_PARAMETER':{'Fn::If':['AskEnabledCondition',ref('AskKeyParameter'),'']},
+    'ASK_QUOTA_TABLE':ref('AskQuotaTable'),
+    'ASK_PROVIDER_URL':ref('AskProviderUrl'),'ASK_MODEL':ref('AskModel'),
+    'ASK_DAILY_LIMIT':{'Fn::Sub':'${AskDailyLimit}'},
+})
+t['Outputs']['AskQuotaTable']={'Value':ref('AskQuotaTable')}
+t['Outputs']['AskEnabled']={'Value':ref('AskEnabled')}
+t['Outputs']['AskModel']={'Value':ref('AskModel')}
+
 Path('infra/template.json').write_text(json.dumps(t,indent=2)+'\n')

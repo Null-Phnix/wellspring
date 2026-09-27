@@ -13,6 +13,41 @@
         "ENABLED",
         "DISABLED"
       ]
+    },
+    "AskEnabled": {
+      "Type": "String",
+      "Default": "false",
+      "AllowedValues": [
+        "true",
+        "false"
+      ]
+    },
+    "AskProviderUrl": {
+      "Type": "String",
+      "Default": "https://api.deepseek.com",
+      "AllowedValues": [
+        "https://api.deepseek.com"
+      ]
+    },
+    "AskModel": {
+      "Type": "String",
+      "Default": "deepseek-chat",
+      "AllowedValues": [
+        "deepseek-chat"
+      ]
+    },
+    "AskKeyParameter": {
+      "Type": "String",
+      "Default": "/wellspring/ask/provider_key",
+      "AllowedValues": [
+        "/wellspring/ask/provider_key"
+      ]
+    },
+    "AskDailyLimit": {
+      "Type": "Number",
+      "Default": 100,
+      "MinValue": 1,
+      "MaxValue": 1000
     }
   },
   "Conditions": {
@@ -26,6 +61,14 @@
             ""
           ]
         }
+      ]
+    },
+    "AskEnabledCondition": {
+      "Fn::Equals": [
+        {
+          "Ref": "AskEnabled"
+        },
+        "true"
       ]
     }
   },
@@ -234,6 +277,42 @@
                 }
               ]
             }
+          },
+          {
+            "PolicyName": "ask-secret-and-quota",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "ssm:GetParameter"
+                  ],
+                  "Resource": {
+                    "Fn::Sub": "arn:${AWS::Partition}:ssm:${AWS::Region}:${AWS::AccountId}:parameter${AskKeyParameter}"
+                  }
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "dynamodb:UpdateItem"
+                  ],
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "AskQuotaTable",
+                      "Arn"
+                    ]
+                  },
+                  "Condition": {
+                    "ForAllValues:StringLike": {
+                      "dynamodb:LeadingKeys": [
+                        "ASK#*"
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
           }
         ]
       }
@@ -297,6 +376,27 @@
             "MANIFEST_KEY": "published/manifest.json",
             "ALLOWED_ORIGINS": {
               "Fn::Sub": "https://${Distribution.DomainName},http://localhost:4200"
+            },
+            "ASK_KEY_PARAMETER": {
+              "Fn::If": [
+                "AskEnabledCondition",
+                {
+                  "Ref": "AskKeyParameter"
+                },
+                ""
+              ]
+            },
+            "ASK_QUOTA_TABLE": {
+              "Ref": "AskQuotaTable"
+            },
+            "ASK_PROVIDER_URL": {
+              "Ref": "AskProviderUrl"
+            },
+            "ASK_MODEL": {
+              "Ref": "AskModel"
+            },
+            "ASK_DAILY_LIMIT": {
+              "Fn::Sub": "${AskDailyLimit}"
             }
           }
         }
@@ -563,6 +663,33 @@
           }
         }
       }
+    },
+    "AskQuotaTable": {
+      "Type": "AWS::DynamoDB::Table",
+      "DeletionPolicy": "Retain",
+      "UpdateReplacePolicy": "Retain",
+      "Properties": {
+        "BillingMode": "PAY_PER_REQUEST",
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "quota_key",
+            "AttributeType": "S"
+          }
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "quota_key",
+            "KeyType": "HASH"
+          }
+        ],
+        "TimeToLiveSpecification": {
+          "AttributeName": "expires_at",
+          "Enabled": true
+        },
+        "SSESpecification": {
+          "SSEEnabled": true
+        }
+      }
     }
   },
   "Outputs": {
@@ -600,6 +727,21 @@
     "IngestFunction": {
       "Value": {
         "Ref": "IngestFunction"
+      }
+    },
+    "AskQuotaTable": {
+      "Value": {
+        "Ref": "AskQuotaTable"
+      }
+    },
+    "AskEnabled": {
+      "Value": {
+        "Ref": "AskEnabled"
+      }
+    },
+    "AskModel": {
+      "Value": {
+        "Ref": "AskModel"
       }
     }
   }
