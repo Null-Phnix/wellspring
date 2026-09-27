@@ -125,17 +125,37 @@ counts, with no truncation, in 8.271/1.699/1.759 seconds. DROP was refused again
 The shared counter read 26/100 at 17:10 UTC, including other live callers. Full
 questions, SQL and answers are in [ASK-RECEIPTS.md](ASK-RECEIPTS.md).
 
-## Release procedure and known limits
+## Release and private mirror
 
-The owner approved a **private** `Null-Phnix/wellspring` mirror. Tag v0.1.0 only
-after required work merges with the configured forge check and independent
-review approved at the pinned head. The combined forge setting limitation above
-remains explicit. Scriptorium
-Scribe Git permissions disallow raw tag creation; the owner-admin governed tag
-operation must target the exact merged release commit. Then mirror only main and
-the tag, verify private visibility and matching hashes, and record the final
-URLs and receipts on issue #1. No tag or mirror completion is implied by this
-pre-release document.
+The owner approved the private repository at
+https://github.com/Null-Phnix/wellspring. It contains only `main` and `v0.1.0`.
+The README and live About page link to it; access requires the owner or an
+explicitly added reader. Public demo access does not grant source access.
+
+The canonical Scriptorium release is
+`6a13f2c7c0b02bfa1a0e8d1ea48838bb0b72af91`. Its audit history and forge-created
+tag are unchanged. The owner requested removal of automatic co-author and
+session trailers from the GitHub mirror only. Every commit, merge relationship,
+author/committer identity, timestamp and file tree is preserved; it is not
+squashed. Source commit hashes elsewhere in this evidence refer to the
+canonical Scriptorium history, not the normalized mirror's different IDs.
+
+The corresponding GitHub release target is
+`a114a26130f648afb59cd7259770d4d78f17027c`. Its only annotated tag, `v0.1.0`, was
+created with Josimar Lee as tagger; tag object
+`f122d2d560945b2c38ce6d1d126d334aee0d02a2`. The first normalization retained all
+47 then-existing commits and removed 27 co-author trailers plus five session
+lines. Later documentation commits advance main without moving that release
+tag. The full commit mapping and remote verification receipts are retained with
+the Scriptorium handoff, outside the published source tree.
+
+GitHub Actions verified both lanes on the normalized release in
+[run 36337926043](https://github.com/Null-Phnix/wellspring/actions/runs/36337926043):
+Python 3.11 and 3.14 backend jobs, web tests and production build succeeded.
+The canonical release's earlier run 36337213197 logged 316 tests per Python
+version and 31 web tests. The forge's own configured check remains backend-only;
+the GitHub workflow supplies the observed cross-lane CI result. Current main,
+tag, visibility and final CI receipts are recorded on Scriptorium issue #1.
 
 Limitations: four explicit source-validation gaps in historical coverage; approximate
 and sometimes absent coordinates; preliminary/revisable source data; a shared
