@@ -71,9 +71,16 @@ can be retried without confusing them with this interpretation.
 
 Generated contract examples now use the M2 enrichment path, including a real
 cancelled record with missing surface location, and the Ask unavailable refusal.
-The integrated suite passes 230 tests.
+The integrated suite passes 231 tests.
 
 September 26 was unrelated: the downloaded WELLS0926.TXT explicitly says
 `DATE: 26 September 2025`, while the requested date was September 26, 2026. The
 rolling filename contains stale prior-year data. The original bytes and receipt
 remain under output/source-data/raw/ and manifest.json; no date is relabelled.
+
+The 07:00 Mountain scheduled invocation on September 27 ran at13:00:44 UTC and
+finished normally. Its published manifest timestamp is13:00:46.971395 UTC.
+AER had then replaced the stale September26 filename with a valid2026 empty
+report: coverage now has57loaded reports, nofailed dates and2,100events.
+The local backfill cache now revalidates headers before reuse, preserves any
+rejected bytes by hash and re-fetches stale or incomplete entries.

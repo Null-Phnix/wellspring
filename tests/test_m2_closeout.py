@@ -58,3 +58,24 @@ def test_generated_licences_examples_show_enriched_and_null_cases():
     assert mapped['location_accuracy']=='approximate' and mapped['location_reason'] is None
     assert missing['latitude'] is None and missing['longitude'] is None
     assert missing['location_reason'] is not None
+
+
+def test_stale_prior_year_cache_is_refetched_without_losing_bytes(tmp_path,monkeypatch):
+    import importlib.util,hashlib
+    from datetime import date
+    from types import SimpleNamespace
+    spec=importlib.util.spec_from_file_location('build_data_under_test',ROOT/'scripts/build_data.py')
+    module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+    current=(ROOT/'fixtures/WELLS0925.TXT').read_bytes()
+    old=current.replace(b'2026',b'2025',1)
+    (tmp_path/'2026-09-25.txt').write_bytes(old)
+    called=[]
+    def download(url):
+        called.append(url);return SimpleNamespace(status='downloaded',raw=current)
+    monkeypatch.setattr(module,'download',download)
+    result=module.get_day(date(2026,9,25),tmp_path)
+    assert result[2]==current and len(called)==1
+    assert (tmp_path/f'{hashlib.sha256(old).hexdigest()}.txt').read_bytes()==old
+    called.clear()
+    assert module.get_day(date(2026,9,25),tmp_path)[2]==current
+    assert called==[]
