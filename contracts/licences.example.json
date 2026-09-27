@@ -50,6 +50,7 @@
       "longitude": null,
       "coordinate_method": null,
       "location_accuracy": null,
+      "location_reason": null,
       "occurrence_count": 1
     }
   ],

@@ -80,6 +80,7 @@ class LicenceEvent:
     longitude: float | None = None
     coordinate_method: str | None = None
     location_accuracy: str | None = None
+    location_reason: str | None = None
 
     @property
     def occurrence_count(self) -> int:

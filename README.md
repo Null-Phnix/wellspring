@@ -6,10 +6,12 @@ AER product and is not affiliated with or endorsed by the AER or GeoLOGIC.
 
 ## Current state
 
-M1 runs locally: Python parser, event history in SQLite, bounded daily/archive
-downloads, a real August 2026 sample month and JSONL export. The API, Angular
-app, map coordinates, AWS deployment, daily cloud schedule and question box
-are later milestones. There is no public application URL yet.
+The local ingestion milestone is implemented. M2 adds a read-only Lambda API,
+a source-linked approximate DLS grid, and a reproducible AWS template. The
+cloud deployment and exact verification state are recorded in
+`docs/M2-EVIDENCE.md`. The Angular app has its own delivery lane; a provisioned
+CloudFront domain does not prove that the frontend has been published.
+The question endpoint remains a refusal stub until M4.
 
 Josii designed and directed the project and reviews its work. Implementation
 is by AI coding agents under his review: Tenjin owns backend/data work and
@@ -72,8 +74,10 @@ Sparse change records do not inherit missing fields from unrelated events.
 Changed fields preserve their exact labels and values; they do not silently
 rewrite the old identity columns. Summary UWI is null when occurrences differ.
 
-Coordinates are null in M1. DLS is parsed from the surface location only.
-Later township-grid positions must be labelled approximate, not survey-grade.
+Ingestion preserves the original M1 records. M2 export enrichment derives DLS
+positions from the surface location only; see `docs/DLS.md` for measured errors
+and the supported area. Unsupported positions remain null with a reason.
+Township-grid positions are labelled approximate, not survey-grade.
 No numeric point is inferred from a well name, a bottomhole location or an
 unverified UWI normalization. Alphanumeric UWI prefixes are preserved.
 The August fixture contains no separately titled reentry section; reentry

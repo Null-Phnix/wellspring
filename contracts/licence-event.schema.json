@@ -29,6 +29,7 @@
     "latitude",
     "longitude",
     "coordinate_method",
+    "location_reason",
     "location_accuracy",
     "occurrence_count",
     "occurrences",
@@ -217,6 +218,12 @@
       "maximum": 180
     },
     "coordinate_method": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "location_reason": {
       "type": [
         "string",
         "null"
