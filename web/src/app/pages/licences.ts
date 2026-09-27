@@ -70,7 +70,7 @@ export function toCsv(rows: LicenceEvent[], columns = COLUMNS): string {
               <td>{{ r.report_date }}</td><td>{{ r.licence_number }}</td><td>{{ r.event_type }}</td>
               <td>{{ r.well_name }}</td><td>{{ r.licensee }}</td><td>{{ r.substance }}</td>
               <td>{{ r.field_centre }}</td><td>{{ r.terminating_zone }}</td><td>{{ r.well_type }}</td>
-              <td>{{ r.dls ?? r.surface_location | dls }}</td>
+              <td>{{ (r.dls ?? r.surface_location) | dls }}</td>
             </tr>
           } @empty {
             <tr><td colspan="10">No events match.</td></tr>
