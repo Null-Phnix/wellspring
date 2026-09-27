@@ -1,0 +1,676 @@
+                                        ALBERTA ENERGY REGULATOR                                        
+                                                                                                        
+                                   WELL LICENCES ISSUED  DAILY LIST                                     
+                                                                                                        
+                                                                                                        
+
+    DATE:  25 September 2026                                                                                  
+                                                                                                        
+
+    --------------------------------------------------------------------------------------------        
+    WELL NAME               LICENCE NUMBER         MINERAL RIGHTS       GROUND ELEVATION                
+    UNIQUE IDENTIFIER       SURFACE CO-ORDINATES   AER FIELD CENTRE     PROJECTED DEPTH                 
+    AER CLASSIFICATION      FIELD                                       TERMINATING ZONE                
+    DRILLING OPERATION      WELL PURPOSE           WELL TYPE            SUBSTANCE                       
+    LICENSEE                                                            SURFACE LOCATION                
+    --------------------------------------------------------------------------------------------        
+
+    IMP 26 N08-H13 ST LEMING 16-11-66-3  0456133   ALBERTA CROWN        610.20M               
+    102/16-11-066-03W4/02  S  259.8M  W  375.5M    BONNYVILLE           1677.0M             
+    DEV (NC)                             LEMING                         CLEARWATER FM                   
+    HORIZONTAL                           RESUMPTIONPRODUCTION           CRUDE BITUMEN                   
+    IMPERIAL OIL RESOURCES LIMITED                                      16-12-066-03W4                  
+                                                                                                        
+    RBY 02 HZ EDWAND 6-2-62-16           0525807   ALBERTA CROWN        689.80M               
+    102/06-02-062-16W4/00  S  185.2M  E  199.3M    BONNYVILLE           4000.0M             
+    DEV (C)                              EDWAND                         CLEARWATER FM                   
+    HORIZONTAL                           NEW       PRODUCTION           CRUDE OIL                       
+    RUBELLITE ENERGY INC.                                               13-26-061-16W4                  
+                                                                                                        
+    CNRL HZ CADOTTE 16-2-85-17           0525808   ALBERTA CROWN        679.80M               
+    100/16-02-085-17W5/00  N  213.6M  E  251.5M    SLAVE LAKE           2775.0M             
+    DEV (NC)                             UNDEFINED                      BLUESKY FM                      
+    HORIZONTAL                           NEW       PRODUCTION (SCHEME)  CRUDE BITUMEN                   
+    CANADIAN NATURAL RESOURCES LIMITED                                  04-10-085-17W5                  
+                                                                                                        
+    CNRL HZ CADOTTE 16-10-85-17          0525809   ALBERTA CROWN        679.70M               
+    100/16-10-085-17W5/00  N  225.6M  E  251.4M    SLAVE LAKE           2750.0M             
+    DEV (NC)                             CADOTTE                        BLUESKY FM                      
+    HORIZONTAL                           NEW       PRODUCTION (SCHEME)  CRUDE BITUMEN                   
+    CANADIAN NATURAL RESOURCES LIMITED                                  04-10-085-17W5                  
+                                                                                                        
+    CNRL HZ CADOTTE 9-10-85-17           0525810   ALBERTA CROWN        679.70M               
+    100/09-10-085-17W5/00  N  235.6M  E  251.3M    SLAVE LAKE           2750.0M             
+    DEV (NC)                             CADOTTE                        BLUESKY FM                      
+    HORIZONTAL                           NEW       PRODUCTION (SCHEME)  CRUDE BITUMEN                   
+    CANADIAN NATURAL RESOURCES LIMITED                                  04-10-085-17W5                  
+                                                                                                        
+    REFRACTION ENRGY PEMBINA 2-32-46-9   0525811   ALBERTA CROWN        931.40M               
+    100/02-32-046-09W5/00  N  559.6M  W  416.3M    DRAYTON VALLEY       7066.0M             
+    DEV (NC)                             PEMBINA                        DUVERNAY FM                     
+    HORIZONTAL                           NEW       PRODUCTION           GAS                             
+    REFRACTION ENERGY CORP.                                             07-07-047-09W5                  
+                                                                                                        
+    CNUL HZ CADOTTE 16-2-85-17           0525812   ALBERTA CROWN        679.80M               
+    102/16-02-085-17W5/00  N  213.6M  E  251.5M    SLAVE LAKE           2775.0M             
+    DEV (NC)                             UNDEFINED                      BLUESKY FM                      
+    HORIZONTAL                           NEW       PRODUCTION (SCHEME)  CRUDE BITUMEN                   
+    CANADIAN NATURAL UPGRADING LIMITED                                  04-10-085-17W5                  
+                                                                                                        
+    CNUL HZ CADOTTE 16-10-85-17          0525813   ALBERTA CROWN        679.70M               
+    102/16-10-085-17W5/00  N  225.6M  E  251.4M    SLAVE LAKE           2750.0M             
+    DEV (NC)                             CADOTTE                        BLUESKY FM                      
+    HORIZONTAL                           NEW       PRODUCTION (SCHEME)  CRUDE BITUMEN                   
+    CANADIAN NATURAL UPGRADING LIMITED                                  04-10-085-17W5                  
+                                                                                                        
+    CNUL HZ CADOTTE 9-10-85-17           0525814   ALBERTA CROWN        679.70M               
+    102/09-10-085-17W5/00  N  235.6M  E  251.3M    SLAVE LAKE           2750.0M             
+    DEV (NC)                             CADOTTE                        BLUESKY FM                      
+    HORIZONTAL                           NEW       PRODUCTION (SCHEME)  CRUDE BITUMEN                   
+    CANADIAN NATURAL UPGRADING LIMITED                                  04-10-085-17W5                  
+                                                                                                        
+    BAYTEX W690 HZ DAWSON 3-23-80-19     0525815   ALBERTA CROWN        609.80M               
+    100/03-23-080-19W5/00  S  407.2M  W  199.3M    SLAVE LAKE           3150.0M             
+    DSW (NC)                             DAWSON                         FALHER MBR                      
+    HORIZONTAL                           NEW       INJECTION            WATER                           
+    BAYTEX ENERGY LTD.                                                  09-26-080-19W5                  
+                                                                                                        
+    BAYTEX E780 HZ DAWSON 4-23-80-19     0525816   ALBERTA CROWN        609.50M               
+    100/04-23-080-19W5/00  S  411.2M  W  218.9M    SLAVE LAKE           3530.0M             
+    DSW (NC)                             DAWSON                         FALHER MBR                      
+    HORIZONTAL                           NEW       INJECTION            WATER                           
+    BAYTEX ENERGY LTD.                                                  09-26-080-19W5                  
+                                                                                                        
+    BAYTEX W415 HZ DAWSON 3-23-80-19     0525817   ALBERTA CROWN        610.10M               
+    102/03-23-080-19W5/00  S  421.9M  W  196.4M    SLAVE LAKE           3025.0M             
+    DEV (NC)                             DAWSON                         FALHER MBR                      
+    HORIZONTAL                           NEW       PRODUCTION (SCHEME)  CRUDE BITUMEN                   
+    BAYTEX ENERGY LTD.                                                  09-26-080-19W5                  
+                                                                                                        
+    BAYTEX W460 HZ DAWSON 4-23-80-19     0525818   ALBERTA CROWN        609.80M               
+    102/04-23-080-19W5/00  S  425.9M  W  216.0M    SLAVE LAKE           3110.0M             
+    DEV (NC)                             DAWSON                         FALHER MBR                      
+    HORIZONTAL                           NEW       PRODUCTION (SCHEME)  CRUDE BITUMEN                   
+    BAYTEX ENERGY LTD.                                                  09-26-080-19W5                  
+                                                                                                        
+    BAYTEX W185 HZ DAWSON 4-24-80-19     0525819   ALBERTA CROWN        609.70M               
+    100/04-24-080-19W5/00  S  392.5M  W  202.3M    SLAVE LAKE           2585.0M             
+    DEV (NC)                             DAWSON                         FALHER MBR                      
+    HORIZONTAL                           NEW       PRODUCTION (SCHEME)  CRUDE BITUMEN                   
+    BAYTEX ENERGY LTD.                                                  16-26-080-19W5                  
+                                                                                                        
+    BAYTEX W385 HZ DAWSON 16-35-80-19    0525820   ALBERTA CROWN        609.40M               
+    102/16-35-080-19W5/00  S  396.5M  W  221.9M    SLAVE LAKE           1930.0M             
+    DEV (NC)                             DAWSON                         FALHER MBR                      
+    HORIZONTAL                           NEW       PRODUCTION (SCHEME)  CRUDE BITUMEN                   
+    BAYTEX ENERGY LTD.                                                  16-26-080-19W5                  
+                                                                                                        
+    BAYTEX W135 HZ DAWSON 3-24-80-19     0525821   ALBERTA CROWN        609.70M               
+    100/03-24-080-19W5/00  S  377.8M  W  205.3M    SLAVE LAKE           2635.0M             
+    DEV (NC)                             DAWSON                         FALHER MBR                      
+    HORIZONTAL                           NEW       PRODUCTION (SCHEME)  CRUDE BITUMEN                   
+    BAYTEX ENERGY LTD.                                                  16-26-080-19W5                  
+                                                                                                        
+    BAYTEX W445 HZ DAWSON 14-35-80-19    0525822   ALBERTA CROWN        609.30M               
+    100/14-35-080-19W5/00  S  381.8M  W  224.9M    SLAVE LAKE           2030.0M             
+    DEV (NC)                             DAWSON                         FALHER MBR                      
+    HORIZONTAL                           NEW       PRODUCTION (SCHEME)  CRUDE BITUMEN                   
+    BAYTEX ENERGY LTD.                                                  16-26-080-19W5                  
+                                                                                                        
+    BAYTEX W30 HZ DAWSON 11-30-80-18     0525823   ALBERTA CROWN        609.70M               
+    100/11-30-080-18W5/00  S  363.1M  W  208.3M    SLAVE LAKE           2440.0M             
+    DEV (NC)                             DAWSON                         FALHER MBR                      
+    HORIZONTAL                           NEW       PRODUCTION (SCHEME)  CRUDE BITUMEN                   
+    BAYTEX ENERGY LTD.                                                  16-26-080-19W5                  
+                                                                                                        
+    BAYTEX E0 HZ DAWSON 14-30-80-18      0525824   ALBERTA CROWN        609.30M               
+    100/14-30-080-18W5/00  S  367.1M  W  227.9M    SLAVE LAKE           2380.0M             
+    DEV (NC)                             DAWSON                         FALHER MBR                      
+    HORIZONTAL                           NEW       PRODUCTION (SCHEME)  CRUDE BITUMEN                   
+    BAYTEX ENERGY LTD.                                                  16-26-080-19W5                  
+                                                                                                        
+    BAYTEX W35 HZ DAWSON 13-36-80-19     0525825   ALBERTA CROWN        609.70M               
+    100/13-36-080-19W5/00  S  348.4M  W  211.3M    SLAVE LAKE           1875.0M             
+    DEV (NC)                             DAWSON                         FALHER MBR                      
+    HORIZONTAL                           NEW       PRODUCTION (SCHEME)  CRUDE BITUMEN                   
+    BAYTEX ENERGY LTD.                                                  16-26-080-19W5                  
+                                                                                                        
+    BAYTEX W105 HZ DAWSON 2-24-80-19     0525826   ALBERTA CROWN        609.20M               
+    100/02-24-080-19W5/00  S  352.4M  W  230.9M    SLAVE LAKE           2925.0M             
+    DEV (NC)                             DAWSON                         FALHER MBR                      
+    HORIZONTAL                           NEW       PRODUCTION (SCHEME)  CRUDE BITUMEN                   
+    BAYTEX ENERGY LTD.                                                  16-26-080-19W5                  
+                                                                                                        
+    BAYTEX W460 HZ DAWSON 13-35-80-19    0525827   ALBERTA CROWN        609.70M               
+    100/13-35-080-19W5/00  S  333.7M  W  214.3M    SLAVE LAKE           2415.0M             
+    DEV (NC)                             DAWSON                         FALHER MBR                      
+    HORIZONTAL                           NEW       PRODUCTION (SCHEME)  CRUDE BITUMEN                   
+    BAYTEX ENERGY LTD.                                                  16-26-080-19W5                  
+                                                                                                        
+    BAYTEX W85 HZ DAWSON 1-24-80-19      0525828   ALBERTA CROWN        609.20M               
+    100/01-24-080-19W5/00  S  337.7M  W  233.9M    SLAVE LAKE           3240.0M             
+    DEV (NC)                             DAWSON                         FALHER MBR                      
+    HORIZONTAL                           NEW       PRODUCTION (SCHEME)  CRUDE BITUMEN                   
+    BAYTEX ENERGY LTD.                                                  16-26-080-19W5                  
+                                                                                                        
+    BAYTEX E5 HZ DAWSON 16-36-80-19      0525829   ALBERTA CROWN        609.80M               
+    100/16-36-080-19W5/00  S  319.0M  W  217.3M    SLAVE LAKE           2205.0M             
+    DEV (NC)                             DAWSON                         FALHER MBR                      
+    HORIZONTAL                           NEW       PRODUCTION (SCHEME)  CRUDE BITUMEN                   
+    BAYTEX ENERGY LTD.                                                  16-26-080-19W5                  
+                                                                                                        
+    ARCHER HZ DIMSD 8-34-71-7            0525830   ALBERTA CROWN        744.70M               
+    100/08-34-071-07W6/00  N  212.2M  W   75.3M    GRANDE PRAIRIE       7150.0M             
+    DEV (C)                              DIMSDALE                       CHARLIE LAKE FM                 
+    HORIZONTAL                           NEW       PRODUCTION           CRUDE OIL                       
+    ARCHER EXPLORATION CORP.                                            01-31-071-07W6                  
+                                                                                                        
+    ATHABASCA C01P05 HANGSTN 6-5-81-8    0525831   ALBERTA CROWN        739.50M               
+    104/06-05-081-08W4/00  N  585.7M  E  406.0M    FORT MCMURRAY        510.0M             
+    DEV (NC)                             HANGINGSTONE                   MCMURRAY FM                     
+    VERTICAL                             NEW       PRODUCTION (SCHEME)  CRUDE BITUMEN                   
+    ATHABASCA OIL CORPORATION                                           06-05-081-08W4                  
+                                                                                                        
+    REFRACTION ENRGY PEMBINA 15-15-47-10 0525832   ALBERTA CROWN        931.40M               
+    100/15-15-047-10W5/00  N  559.6M  W  426.3M    DRAYTON VALLEY       7035.0M             
+    DEV (NC)                             PEMBINA                        DUVERNAY FM                     
+    HORIZONTAL                           NEW       PRODUCTION           GAS                             
+    REFRACTION ENERGY CORP.                                             07-07-047-09W5                  
+                                                                                                        
+    REFRACTION ENRGY PEMBINA 10-10-46-9  0525833   ALBERTA CROWN        920.60M               
+    100/10-10-046-09W5/00  N  383.5M  W  344.1M    DRAYTON VALLEY       7001.0M             
+    DEV (NC)                             PEMBINA                        DUVERNAY FM                     
+    HORIZONTAL                           NEW       PRODUCTION           GAS                             
+    REFRACTION ENERGY CORP.                                             01-20-046-09W5                  
+                                                                                                        
+    NORTH 40 11B HZ AERIAL 11-12-29-19   0525834   ALBERTA CROWN        829.30M               
+    100/11-12-029-19W4/00  N  195.0M  W  729.3M    CALGARY              3934.0M             
+    DEV (NC)                             AERIAL                         MANNVILLE GRP                   
+    HORIZONTAL                           NEW       PRODUCTION           CRUDE OIL                       
+    NORTH 40 RESOURCES LTD.                                             02-24-029-19W4                  
+                                                                                                        
+    IMP  27 S03-I04  LEMING 5-17-66-3    0525835   ALBERTA CROWN        624.00M               
+    100/05-17-066-03W4/00  S  301.0M  W  594.1M    BONNYVILLE           1652.0M             
+    DSW (NC)                             LEMING                         GRAND RAPIDS FM                 
+    HORIZONTAL                           NEW       INJECTION            WATER                           
+    IMPERIAL OIL RESOURCES LIMITED                                      15-07-066-03W4                  
+                                                                                                        
+    IMP 27 S03-I04  LEMING 12-16-66-3    0525836   ALBERTA CROWN        624.00M               
+    100/12-16-066-03W4/00  S  301.0M  W  594.1M    BONNYVILLE           1886.0M             
+    DSW (NC)                             LEMING                         GRAND RAPIDS FM                 
+    HORIZONTAL                           NEW       INJECTION            WATER                           
+    IMPERIAL OIL RESOURCES LIMITED                                      15-07-066-03W4                  
+                                                                                                        
+    AMENDMENTS OF WELL LICENCES
+    ---------------------------
+
+    WELL NAME AND U.I.D.                LICENCE NO.  AMENDED TO READ
+    --------------------                -----------  ---------------
+
+    SPARTAN DELTA HZ WILLGR 15-27-43-9     0525662   WELL NAME:                                         
+    102/15-27-043-09W5/00                            SPARTAN DELTA 102 WILLGR 15-27-43-9                
+
+    WELL LICENCES CANCELLED
+    -----------------------
+
+    WELL NAME AND U.I.D.                LICENCE NO.                                                     
+    --------------------                -----------                                                     
+
+    CNRL HZ CADOTTE 16-2-85-17            0525808                                                       
+    100/00-00-000-00W0/00                                                                               
+
+    CNRL HZ CADOTTE 16-10-85-17           0525809                                                       
+    100/00-00-000-00W0/00                                                                               
+
+    CNRL HZ CADOTTE 9-10-85-17            0525810                                                       
+    100/00-00-000-00W0/00                                                                               
+
+    WELL LICENCES UPDATED
+    ---------------------------
+
+    WELL NAME AND U.I.D.                LICENCE NO.  AMENDED TO READ
+    --------------------                -----------  ---------------
+
+    CNRL 8C HZ FT KENT 8-2-62-5            0516470   UWI:                                               
+    02/08-02-062-05W4/5                              00/10-02-062-05W4/5                                
+
+                                                     WELL NAME:                                         
+                                                     CNRL 8C HZ FT KENT 10-2-62-5                       
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     10-02-062-05W4                                     
+
+    CNRL 8C HZ FT KENT 8-2-62-5            0516470   UWI:                                               
+    02/08-02-062-05W4/6                              00/10-02-062-05W4/6                                
+
+                                                     WELL NAME:                                         
+                                                     CNRL 8C HZ FT KENT 10-2-62-5                       
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     10-02-062-05W4                                     
+
+    CNRL 8C HZ FT KENT 8-2-62-5            0516470   UWI:                                               
+    02/08-02-062-05W4/7                              00/10-02-062-05W4/7                                
+
+                                                     WELL NAME:                                         
+                                                     CNRL 8C HZ FT KENT 10-2-62-5                       
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     10-02-062-05W4                                     
+
+    CNRL 8C HZ FT KENT 8-2-62-5            0516470   UWI:                                               
+    02/08-02-062-05W4/8                              00/10-02-062-05W4/8                                
+
+                                                     WELL NAME:                                         
+                                                     CNRL 8C HZ FT KENT 10-2-62-5                       
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     10-02-062-05W4                                     
+
+    CNRL 8C HZ FT KENT 8-2-62-5            0516470   UWI:                                               
+    02/08-02-062-05W4/9                              00/10-02-062-05W4/9                                
+
+                                                     WELL NAME:                                         
+                                                     CNRL 8C HZ FT KENT 10-2-62-5                       
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     10-02-062-05W4                                     
+
+    CALTEX TRILOGY LIND 9-29-56-2          0517834   UWI:                                               
+    00/09-29-056-02W4/8                              02/16-29-056-02W4/8                                
+
+                                                     WELL NAME:                                         
+                                                     CALTEX 102 LIND 16-29-56-2                         
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     16-29-056-02W4                                     
+
+    CALTEX TRILOGY LIND 9-29-56-2          0517834   UWI:                                               
+    00/09-29-056-02W4/9                              02/16-29-056-02W4/9                                
+
+                                                     WELL NAME:                                         
+                                                     CALTEX 102 LIND 16-29-56-2                         
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     16-29-056-02W4                                     
+
+    BAYTEX HZ N155 CHARLK 9-12-60-3        0519282   UWI:                                               
+    00/09-12-060-03W4/8                              02/10-12-060-03W4/8                                
+
+                                                     WELL NAME:                                         
+                                                     BAYTEX HZ N155 CHARLK 10-12-60-3                   
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     10-12-060-03W4                                     
+
+    BAYTEX HZ N155 CHARLK 9-12-60-3        0519282   UWI:                                               
+    00/09-12-060-03W4/4                              02/15-12-060-03W4/4                                
+
+                                                     WELL NAME:                                         
+                                                     BAYTEX HZ N155 CHARLK 15-12-60-3                   
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     15-12-060-03W4                                     
+
+    BAYTEX HZ N155 CHARLK 9-12-60-3        0519282   UWI:                                               
+    00/09-12-060-03W4/5                              02/15-12-060-03W4/5                                
+
+                                                     WELL NAME:                                         
+                                                     BAYTEX HZ N155 CHARLK 15-12-60-3                   
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     15-12-060-03W4                                     
+
+    BAYTEX HZ N155 CHARLK 9-12-60-3        0519282   UWI:                                               
+    00/09-12-060-03W4/6                              02/15-12-060-03W4/6                                
+
+                                                     WELL NAME:                                         
+                                                     BAYTEX HZ N155 CHARLK 15-12-60-3                   
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     15-12-060-03W4                                     
+
+    BAYTEX HZ N155 CHARLK 9-12-60-3        0519282   UWI:                                               
+    00/09-12-060-03W4/7                              02/15-12-060-03W4/7                                
+
+                                                     WELL NAME:                                         
+                                                     BAYTEX HZ N155 CHARLK 15-12-60-3                   
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     15-12-060-03W4                                     
+
+    BAYTEX HZ N50 CHARLK 1-12-60-3         0519286   UWI:                                               
+    00/01-12-060-03W4/7                              00/08-12-060-03W4/7                                
+
+                                                     WELL NAME:                                         
+                                                     BAYTEX HZ N50 CHARLK 8-12-60-3                     
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     08-12-060-03W4                                     
+
+    BAYTEX HZ N50 CHARLK 1-12-60-3         0519286   UWI:                                               
+    00/01-12-060-03W4/8                              00/08-12-060-03W4/8                                
+
+                                                     WELL NAME:                                         
+                                                     BAYTEX HZ N50 CHARLK 8-12-60-3                     
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     08-12-060-03W4                                     
+
+    BAYTEX HZ N50 CHARLK 1-12-60-3         0519286   UWI:                                               
+    00/01-12-060-03W4/9                              00/08-12-060-03W4/9                                
+
+                                                     WELL NAME:                                         
+                                                     BAYTEX HZ N50 CHARLK 8-12-60-3                     
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     08-12-060-03W4                                     
+
+    BAYTEX HZ N50 CHARLK 1-12-60-3         0519286   UWI:                                               
+    00/01-12-060-03W4/6                              02/09-12-060-03W4/6                                
+
+                                                     WELL NAME:                                         
+                                                     BAYTEX HZ N50 CHARLK 9-12-60-3                     
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     09-12-060-03W4                                     
+
+    BAYTEX HZ N50 CHARLK 1-12-60-3         0519286   UWI:                                               
+    00/01-12-060-03W4/2                              02/16-12-060-03W4/2                                
+
+                                                     WELL NAME:                                         
+                                                     BAYTEX HZ N50 CHARLK 16-12-60-3                    
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     16-12-060-03W4                                     
+
+    BAYTEX HZ N50 CHARLK 1-12-60-3         0519286   UWI:                                               
+    00/01-12-060-03W4/3                              02/16-12-060-03W4/3                                
+
+                                                     WELL NAME:                                         
+                                                     BAYTEX HZ N50 CHARLK 16-12-60-3                    
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     16-12-060-03W4                                     
+
+    BAYTEX HZ N50 CHARLK 1-12-60-3         0519286   UWI:                                               
+    00/01-12-060-03W4/4                              02/16-12-060-03W4/4                                
+
+                                                     WELL NAME:                                         
+                                                     BAYTEX HZ N50 CHARLK 16-12-60-3                    
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     16-12-060-03W4                                     
+
+    BAYTEX HZ N50 CHARLK 1-12-60-3         0519286   UWI:                                               
+    00/01-12-060-03W4/5                              02/16-12-060-03W4/5                                
+
+                                                     WELL NAME:                                         
+                                                     BAYTEX HZ N50 CHARLK 16-12-60-3                    
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     16-12-060-03W4                                     
+
+    BAYTEX HZ S785 CHARLK 14-3-60-3        0520465   UWI:                                               
+    00/14-03-060-03W4/2                              02/11-03-060-03W4/2                                
+
+                                                     WELL NAME:                                         
+                                                     BAYTEX HZ S785 CHARLK 11-3-60-3                    
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     11-03-060-03W4                                     
+
+    BAYTEX HZ S785 CHARLK 14-3-60-3        0520465   UWI:                                               
+    00/14-03-060-03W4/3                              02/11-03-060-03W4/3                                
+
+                                                     WELL NAME:                                         
+                                                     BAYTEX HZ S785 CHARLK 11-3-60-3                    
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     11-03-060-03W4                                     
+
+    BAYTEX HZ S785 CHARLK 14-3-60-3        0520465   UWI:                                               
+    00/14-03-060-03W4/7                              02/11-03-060-03W4/7                                
+
+                                                     WELL NAME:                                         
+                                                     BAYTEX HZ S785 CHARLK 11-3-60-3                    
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     11-03-060-03W4                                     
+
+    BAYTEX HZ S785 CHARLK 14-3-60-3        0520465   UWI:                                               
+    00/14-03-060-03W4/9                              02/11-03-060-03W4/9                                
+
+                                                     WELL NAME:                                         
+                                                     BAYTEX HZ S785 CHARLK 11-3-60-3                    
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     11-03-060-03W4                                     
+
+    BAYTEX HZ S785 CHARLK 14-3-60-3        0520465   UWI:                                               
+    00/14-03-060-03W4/4                              00/12-03-060-03W4/4                                
+
+                                                     WELL NAME:                                         
+                                                     BAYTEX HZ S785 CHARLK 12-3-60-3                    
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     12-03-060-03W4                                     
+
+    BAYTEX HZ S785 CHARLK 14-3-60-3        0520465   UWI:                                               
+    00/14-03-060-03W4/5                              00/12-03-060-03W4/5                                
+
+                                                     WELL NAME:                                         
+                                                     BAYTEX HZ S785 CHARLK 12-3-60-3                    
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     12-03-060-03W4                                     
+
+    BAYTEX HZ S785 CHARLK 14-3-60-3        0520465   UWI:                                               
+    00/14-03-060-03W4/6                              00/12-03-060-03W4/6                                
+
+                                                     WELL NAME:                                         
+                                                     BAYTEX HZ S785 CHARLK 12-3-60-3                    
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     12-03-060-03W4                                     
+
+    BAYTEX HZ S785 CHARLK 14-3-60-3        0520465   UWI:                                               
+    00/14-03-060-03W4/8                              00/12-03-060-03W4/8                                
+
+                                                     WELL NAME:                                         
+                                                     BAYTEX HZ S785 CHARLK 12-3-60-3                    
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     12-03-060-03W4                                     
+
+    BAYTEX E345 HZ CADOTTE 2-10-84-17      0521832   UWI:                                               
+    00/02-10-084-17W5/4                              02/03-10-084-17W5/4                                
+
+                                                     WELL NAME:                                         
+                                                     BAYTEX E345 HZ CADOTTE 3-10-84-17                  
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     03-10-084-17W5                                     
+
+    BAYTEX E345 HZ CADOTTE 2-10-84-17      0521832   UWI:                                               
+    00/02-10-084-17W5/5                              02/03-10-084-17W5/5                                
+
+                                                     WELL NAME:                                         
+                                                     BAYTEX E345 HZ CADOTTE 3-10-84-17                  
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     03-10-084-17W5                                     
+
+    BAYTEX E345 HZ CADOTTE 2-10-84-17      0521832   UWI:                                               
+    00/02-10-084-17W5/6                              02/03-10-084-17W5/6                                
+
+                                                     WELL NAME:                                         
+                                                     BAYTEX E345 HZ CADOTTE 3-10-84-17                  
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     03-10-084-17W5                                     
+
+    BAYTEX E345 HZ CADOTTE 2-10-84-17      0521832   UWI:                                               
+    00/02-10-084-17W5/7                              02/03-10-084-17W5/7                                
+
+                                                     WELL NAME:                                         
+                                                     BAYTEX E345 HZ CADOTTE 3-10-84-17                  
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     03-10-084-17W5                                     
+
+    BAYTEX E345 HZ CADOTTE 2-10-84-17      0521832   UWI:                                               
+    00/02-10-084-17W5/8                              02/03-10-084-17W5/8                                
+
+                                                     WELL NAME:                                         
+                                                     BAYTEX E345 HZ CADOTTE 3-10-84-17                  
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     03-10-084-17W5                                     
+
+    BAYTEX E345 HZ CADOTTE 2-10-84-17      0521832   UWI:                                               
+    00/02-10-084-17W5/9                              02/03-10-084-17W5/9                                
+
+                                                     WELL NAME:                                         
+                                                     BAYTEX E345 HZ CADOTTE 3-10-84-17                  
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     03-10-084-17W5                                     
+
+    BAYTEX HZ N250 CHARLK 4-18-60-3        0522250   UWI:                                               
+    04/04-18-060-03W4/2                              00/01-18-060-03W4/2                                
+
+                                                     WELL NAME:                                         
+                                                     BAYTEX HZ N250 CHARLK 1-18-60-3                    
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     01-18-060-03W4                                     
+
+    BAYTEX HZ N250 CHARLK 4-18-60-3        0522250   UWI:                                               
+    04/04-18-060-03W4/9                              00/01-18-060-03W4/9                                
+
+                                                     WELL NAME:                                         
+                                                     BAYTEX HZ N250 CHARLK 1-18-60-3                    
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     01-18-060-03W4                                     
+
+    BAYTEX HZ N250 CHARLK 4-18-60-3        0522250   UWI:                                               
+    04/04-18-060-03W4/0                              00/02-18-060-03W4/0                                
+
+                                                     WELL NAME:                                         
+                                                     BAYTEX HZ N250 CHARLK 2-18-60-3                    
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     02-18-060-03W4                                     
+
+    TQN FERRIER 16-11-43-11                0522500   UWI:                                               
+    00/16-11-043-11W5/0                              00/02-15-043-11W5/0                                
+
+                                                     WELL NAME:                                         
+                                                     TQN FERRIER 2-15-43-11                             
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     02-15-043-11W5                                     
+
+    COPRC 107WP07 RSDLN 9-9-83-7           0523048   UWI:                                               
+    02/09-09-083-07W4/0                              02/12-10-083-07W4/0                                
+
+                                                     WELL NAME:                                         
+                                                     COPRC 107WP07 RSDLN 12-10-83-7                     
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     12-10-083-07W4                                     
+
+    VEI HZ LAWRNC 8-10-41-12               0524021   UWI:                                               
+    00/08-10-041-12W5/0                              00/15-34-040-12W5/0                                
+
+                                                     WELL NAME:                                         
+                                                     VEI CHAMBERS 15-34-40-12                           
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     15-34-040-12W5                                     
+
+    VEI LAWRNC 15-34-41-12                 0524021   UWI:                                               
+    00/15-34-041-12W5/0                              00/15-34-040-12W5/0                                
+
+                                                     WELL NAME:                                         
+                                                     VEI CHAMBERS 15-34-40-12                           
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     15-34-040-12W5                                     
+
+    IPCCAN 4A-29 MHZ JENNER 5-30-18-9      0524302   UWI:                                               
+    00/05-30-018-09W4/4                              02/03-30-018-09W4/4                                
+
+                                                     WELL NAME:                                         
+                                                     IPCCAN 4A-29 MHZ JENNER 3-30-18-9                  
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     03-30-018-09W4                                     
+
+    CNRL 14A HZ CHANDLER 14-4-59-2         0524845   UWI:                                               
+    02/14-04-059-02W4/3                              03/11-04-059-02W4/3                                
+
+                                                     WELL NAME:                                         
+                                                     CNRL 14A HZ CHANDLER 11-4-59-2                     
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     11-04-059-02W4                                     
+
+    CNRL 14A HZ CHANDLER 14-4-59-2         0524845   UWI:                                               
+    02/14-04-059-02W4/4                              03/11-04-059-02W4/4                                
+
+                                                     WELL NAME:                                         
+                                                     CNRL 14A HZ CHANDLER 11-4-59-2                     
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     11-04-059-02W4                                     
+
+    CNRL 14A HZ CHANDLER 14-4-59-2         0524845   UWI:                                               
+    02/14-04-059-02W4/5                              03/11-04-059-02W4/5                                
+
+                                                     WELL NAME:                                         
+                                                     CNRL 14A HZ CHANDLER 11-4-59-2                     
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     11-04-059-02W4                                     
+
+    CNRL 14A HZ CHANDLER 14-4-59-2         0524845   UWI:                                               
+    02/14-04-059-02W4/6                              03/11-04-059-02W4/6                                
+
+                                                     WELL NAME:                                         
+                                                     CNRL 14A HZ CHANDLER 11-4-59-2                     
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     11-04-059-02W4                                     
+
+    CNRL 14A HZ CHANDLER 14-4-59-2         0524845   UWI:                                               
+    02/14-04-059-02W4/7                              03/11-04-059-02W4/7                                
+
+                                                     WELL NAME:                                         
+                                                     CNRL 14A HZ CHANDLER 11-4-59-2                     
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     11-04-059-02W4                                     
+
+    CNRL 14A HZ CHANDLER 14-4-59-2         0524845   UWI:                                               
+    02/14-04-059-02W4/8                              03/11-04-059-02W4/8                                
+
+                                                     WELL NAME:                                         
+                                                     CNRL 14A HZ CHANDLER 11-4-59-2                     
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     11-04-059-02W4                                     
+
+    NORTH 40 HZ CESS 13-18-27-17           0525160   UWI:                                               
+    03/13-18-027-17W4/0                              00/05-18-027-17W4/0                                
+
+                                                     WELL NAME:                                         
+                                                     NORTH 40 CESS 5-18-27-17                           
+
+                                                     BOTTOMHOLE LOCATION:                               
+                                                     05-18-027-17W4                                     
+
+
+    -------------------- END OF WELL LICENCES DAILY LIST  -------------------- 
