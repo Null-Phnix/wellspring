@@ -8,7 +8,7 @@ describe('App', () => {
   it('renders the shell with the five pages, the AER attribution, data as of and the repo link', async () => {
     await TestBed.configureTestingModule({
       imports: [App],
-      providers: [provideRouter([]), { provide: ApiService, useValue: { dataAsOf: signal('2026-09-27T13:00:46Z') } }],
+      providers: [provideRouter([]), { provide: ApiService, useValue: { dataAsOf: signal('2026-09-27T13:00:46Z'), substances: () => Promise.resolve({ items: [], meta: null }) } }],
     }).compileComponents();
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
