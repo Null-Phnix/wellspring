@@ -31,6 +31,7 @@ SORT_FIELDS = frozenset({"report_date", "licence_number", "licensee", "substance
 POINT_FIELDS = (
     "id", "licence_number", "well_name", "licensee", "substance", "report_date",
     "latitude", "longitude", "coordinate_method", "location_accuracy", "location_reason",
+    "surface_location",
 )
 ROUTES = {
     "/licences": frozenset({"GET"}),

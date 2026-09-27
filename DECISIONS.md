@@ -2,6 +2,8 @@
 
 Dated, one per line, newest first. Why, not just what.
 
+- 2026-09-27: The points projection includes the original surface_location string so map popups can show the DLS without another lookup. Document all live coverage fields, preserving explicit nulls and filter ranges for empty results. (Tenjin; Nabu issue #1 comment #134)
+
 - 2026-09-27: Unsupported surface DLS is a nullable location limitation on the event, not a fatal report parse error. Preserve the raw location and all other valid events, bump parser version to 0.1.1, and leave structural/date errors fatal. September 26 was a stale 2025 source header, so its date guard is retained. (Tenjin; findings 124/125/128 close-out)
 
 - 2026-09-27: M2 uses plain CloudFormation so the installed AWS CLI can reproduce the data/site buckets, scoped functions, HTTP API, CloudFront and timezone-aware schedule without a SAM build dependency. The two-phase code-key update keeps artifacts in the template-owned data bucket; scheduled intake remains disabled until validated. (Tenjin; issue #1 #125/#126)
