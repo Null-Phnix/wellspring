@@ -40,8 +40,26 @@ button:disabled { opacity: .5; cursor: default; }
 textarea { width: 100%; display: block; margin-bottom: .5rem; }
 .pager { display: flex; gap: 1rem; align-items: center; margin-top: .75rem; }
 .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+.window { display: flex; gap: .75rem; flex-wrap: wrap; align-items: end; margin-bottom: 1rem; }
+.window label { display: flex; flex-direction: column; font-size: .8rem; color: var(--muted); }
+.presets { display: flex; gap: .25rem; }
+.presets button { background: #fff; color: var(--ink); border-color: #d1d5db; }
+.presets button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
 .bars { display: flex; align-items: flex-end; gap: 2px; height: 180px; border-bottom: 1px solid var(--line); }
-.bars .bar { flex: 1; min-height: 1px; background: var(--accent); }
+.bars .bar { flex: 1; min-height: 2px; background: var(--accent); display: block; }
+.bars a.bar:hover, .bars a.bar:focus-visible { background: #1e3a8a; outline: none; }
+.bars .gap { background: #e5e7eb; height: 2px; }
+.bars .gap.empty { background: #9ca3af; height: 4px; }
+.bars .gap.failed { background: #dc2626; height: 8px; }
+.bars .gap.missing { background: #f59e0b; height: 8px; }
+.strip { display: flex; gap: 2px; flex-wrap: wrap; margin-bottom: .35rem; }
+.strip i { width: 10px; height: 14px; display: inline-block; border-radius: 2px; }
+.strip i.loaded, .legend i.loaded { background: #16a34a; }
+.strip i.empty, .legend i.empty { background: #9ca3af; }
+.strip i.failed, .legend i.failed { background: #dc2626; }
+.strip i.missing, .legend i.missing { background: #f59e0b; }
+.strip i.unknown, .legend i.unknown { background: #e5e7eb; }
+ul.problems { margin: 0 0 .5rem; padding-left: 1.2rem; font-size: .9rem; }
 .map { height: 70vh; min-height: 400px; border: 1px solid var(--line); }
 .legend { display: flex; gap: 1rem; flex-wrap: wrap; font-size: .85rem; }
 .legend i { display: inline-block; width: .8rem; height: .8rem; border-radius: 50%; margin-right: .35rem; vertical-align: -1px; }
