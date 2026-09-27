@@ -5,7 +5,8 @@ Regulator's public ST1 reports. It preserves report sources, distinguishes new
 licences from changes, and shows approximate surface positions where supported.
 
 [Open the live demo](https://d157m2vmtz6y3j.cloudfront.net/) ·
-[Read the API](https://yjzy2hz1z1.execute-api.ca-central-1.amazonaws.com/licences?page_size=2)
+[Read the API](https://yjzy2hz1z1.execute-api.ca-central-1.amazonaws.com/licences?page_size=2) ·
+[Source code (private)](https://github.com/Null-Phnix/wellspring)
 
 This is an independent educational portfolio project. It is not an official AER
 product and is not affiliated with or endorsed by the AER or GeoLOGIC.
