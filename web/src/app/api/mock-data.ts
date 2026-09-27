@@ -71,13 +71,17 @@ const ALL: LicenceEvent[] = [];
 const REPORT_DATES = new Set(ALL.map(r => r.report_date));
 
 function select(q: StatsQuery): LicenceEvent[] {
-  const like = (v: string | null, f?: string) => !f || (v ?? '').toLowerCase().includes(f.toLowerCase());
+  // docs/API-CONTRACT.md: text filters are exact values. Licensee is a case-insensitive
+  // contains match here because that is what the client asked for on issue #2; drop to
+  // exact if Tenjin declines.
+  const exact = (v: string | null, f?: string) => !f || v === f;
+  const contains = (v: string | null, f?: string) => !f || (v ?? '').toLowerCase().includes(f.toLowerCase());
   const type = q.event_type ?? 'issued';
   return ALL.filter(r =>
     (type === 'all' || r.event_type === type) &&
     (!q.date_from || r.report_date >= q.date_from) && (!q.date_to || r.report_date <= q.date_to) &&
-    like(r.licensee, q.licensee) && like(r.substance, q.substance) && like(r.field_centre, q.field_centre) &&
-    like(r.terminating_zone, q.terminating_zone) && like(r.well_type, q.well_type),
+    contains(r.licensee, q.licensee) && exact(r.substance, q.substance) && exact(r.field_centre, q.field_centre) &&
+    exact(r.terminating_zone, q.terminating_zone) && exact(r.well_type, q.well_type),
   );
 }
 
@@ -113,7 +117,7 @@ export function mockAsk(question: string): AskResponse {
   const q = { date_from: iso(30), date_to: iso(0) };
   if (/\b(drop|delete|update|insert|alter|truncate|pragma|attach)\b/i.test(question)) {
     return { status: 'refused', columns: [], rows: [], sql: null, row_limit: 200, truncated: false,
-      refusal: { code: 'not_select', message: 'Only a single read-only SELECT is allowed.' }, meta: meta(q) };
+      refusal: { code: 'READ_ONLY_REQUIRED', message: 'Only read-only data questions are supported.' }, meta: meta(q) };
   }
   const rows = mockStats('top-licensees', { ...q, limit: 5 }).items.map(r => ({ licensee: r['licensee'], licences: r['count'] }));
   const sql = [

@@ -41,15 +41,15 @@ export function toCsv(rows: LicenceEvent[], columns = COLUMNS): string {
         </select>
       </label>
       <label>Licensee <input name="licensee" [value]="q().licensee ?? ''"></label>
-      <label>Substance <input name="substance" list="substances" [value]="q().substance ?? ''"></label>
+      <label>Substance <input name="substance" list="substances" placeholder="exact value" [value]="q().substance ?? ''"></label>
       <datalist id="substances">
         <option>CRUDE BITUMEN</option><option>CRUDE OIL</option><option>GAS</option><option>WATER</option>
       </datalist>
-      <label>Field centre <input name="field_centre" [value]="q().field_centre ?? ''"></label>
-      <label>Terminating zone <input name="terminating_zone" [value]="q().terminating_zone ?? ''"></label>
-      <label>Well type <input name="well_type" [value]="q().well_type ?? ''"></label>
+      <label>Field centre <input name="field_centre" placeholder="exact value" [value]="q().field_centre ?? ''"></label>
+      <label>Terminating zone <input name="terminating_zone" placeholder="exact value" [value]="q().terminating_zone ?? ''"></label>
+      <label>Well type <input name="well_type" placeholder="exact value" [value]="q().well_type ?? ''"></label>
       <button>Apply</button>
-      <button type="button" (click)="exportCsv()" [disabled]="!page.value()">Export CSV</button>
+      <button type="button" (click)="exportCsv()" [disabled]="!page.value()">Export CSV (loaded rows)</button>
     </form>
 
     @if (page.value(); as p) {
