@@ -1,11 +1,14 @@
 # Screenshots of the live site
 
-Captured from https://d157m2vmtz6y3j.cloudfront.net on 2026-09-27 at 1280x1000 (the `mobile-` captures at 390x844, device scale 2, after the 390px accessibility pass; `about` recaptured after the authorship paragraph was aligned with the README) and served from the site bucket (the PNGs are not kept in git because the forge's chunked review cannot inspect binary patches). Each URL, size and SHA-256 below is the file as uploaded.
+Captured from https://d157m2vmtz6y3j.cloudfront.net on 2026-09-27 at 1280x1000 (the `mobile-` captures at 390x844, device scale 2, after the 390px accessibility pass; `about` recaptured after the authorship paragraph was aligned with the README; the `ask-live` captures are real deepseek-flash answers on production after the M4 deploy: the first example chip at 1280x1000 and at 390x844, and a 200-row question showing the truncated badge) and served from the site bucket (the PNGs are not kept in git because the forge's chunked review cannot inspect binary patches). Each URL, size and SHA-256 below is the file as uploaded.
 
 | page | URL | bytes | sha256 |
 |---|---|---|---|
 | about | https://d157m2vmtz6y3j.cloudfront.net/screenshots/about.png | 145317 | d60997319ba538ef0f8028e76d65f3afb05fe050660413f2b4619c471d73bcb0 |
 | ask | https://d157m2vmtz6y3j.cloudfront.net/screenshots/ask.png | 62830 | bf9086f74113974e79ab7be246dcd8570aef8688ae46bea89c1b139448d03b6f |
+| ask-live | https://d157m2vmtz6y3j.cloudfront.net/screenshots/ask-live.png | 106130 | 3973464d2c4228039030ea7296e5d34e2203104ed686dea6cf11f63220ca5076 |
+| ask-live-mobile | https://d157m2vmtz6y3j.cloudfront.net/screenshots/ask-live-mobile.png | 63627 | ea2682f960dd63b1f685273026b1e061a7988d2855916279cc48fb688c6d8312 |
+| ask-live-truncated | https://d157m2vmtz6y3j.cloudfront.net/screenshots/ask-live-truncated.png | 127754 | 06b7a55723503e5a8ce817d8c222f3289657640db53b03f8f6d5dd5901045994 |
 | dashboard | https://d157m2vmtz6y3j.cloudfront.net/screenshots/dashboard.png | 104740 | ae6428334e833402bd1fb5eca1eae10f59b30c930d51ee0f0e10c6a89190e2e6 |
 | deep-link-licences-cenovus | https://d157m2vmtz6y3j.cloudfront.net/screenshots/deep-link-licences-cenovus.png | 227601 | 472ced8380b4f359ec79f390d37d5631a2e5510a7005daca2e924dd5a5c9db20 |
 | licences | https://d157m2vmtz6y3j.cloudfront.net/screenshots/licences.png | 220456 | deb7da6a9f1d81b92582570f12cecae487be73ae27a8021818681257eb49472f |
