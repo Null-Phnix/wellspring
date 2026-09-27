@@ -74,7 +74,8 @@ export interface LicencePoint {
   surface_location?: string | null; // asked for on issue #1; absent until Tenjin adds it
 }
 
-export type SortKey = 'report_date' | 'licence_number' | 'licensee' | 'substance' | 'field_centre' | 'terminating_zone' | 'well_type';
+export const SORT_KEYS = ['report_date', 'licence_number', 'licensee', 'substance', 'field_centre', 'terminating_zone', 'well_type'] as const;
+export type SortKey = (typeof SORT_KEYS)[number];
 
 /** GET /licences query. Dates inclusive; event_type defaults to issued, 'all' is explicit; page_size 1..200. */
 export interface LicenceQuery {
