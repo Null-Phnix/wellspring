@@ -1,97 +1,121 @@
 # Wellspring
 
-Wellspring is a small Alberta well-licence explorer for an educational portfolio.
-It uses the Alberta Energy Regulator's public ST1 reports. It is not an official
-AER product and is not affiliated with or endorsed by the AER or GeoLOGIC.
+Wellspring explores Alberta well-licence activity from the Alberta Energy
+Regulator's public ST1 reports. It preserves report sources, distinguishes new
+licences from changes, and shows approximate surface positions where supported.
+
+[Open the live demo](https://d157m2vmtz6y3j.cloudfront.net/) ·
+[Read the API](https://yjzy2hz1z1.execute-api.ca-central-1.amazonaws.com/licences?page_size=2)
+
+This is an independent educational portfolio project. It is not an official AER
+product and is not affiliated with or endorsed by the AER or GeoLOGIC.
 
 ## Current state
 
-The local ingestion milestone is implemented. M2 adds a read-only Lambda API,
-a source-linked approximate DLS grid, and a reproducible AWS template. The
-cloud deployment and exact verification state are recorded in
-`docs/M2-EVIDENCE.md`. The Angular app has its own delivery lane; a provisioned
-CloudFront domain does not prove that the frontend has been published.
-The question endpoint remains a refusal stub until M4.
+The ingestion pipeline and read-only API are live on AWS. The Angular frontend
+uses live data and includes a dashboard, licence table, map, Ask and About.
+The Ask endpoint currently returns `ASK_UNAVAILABLE`; it does not yet make model
+calls. A final release tag and private GitHub mirror are pending the remaining
+review, provider and release gates. See [the evidence record](docs/EVIDENCE.md)
+for what was tested, deployed and still unfinished.
 
-Josii designed and directed the project and reviews its work. Implementation
-is by AI coding agents under his review: Tenjin owns backend/data work and
-Nabu owns the Angular app. Tests and review evidence describe what ran, not a
-claim that Josii independently wrote every line.
+The verified sample covers August 2026 and September through the latest published
+report. It is not the full January-to-current backlog. Coverage reports missing,
+failed, empty and loaded dates separately. A source that has not published yet
+must not be drawn as a zero-event day.
 
-## Run locally
+## Run locally in five commands
 
-Python 3.11 or newer. The runtime has no third-party Python dependencies.
+Use Python 3.11 or newer and the Node version required by `web/package.json` and
+its lockfile. The current Angular toolchain needs Node 22.12 or newer; the local
+verification recorded in the evidence file used Node 26.10.0.
 
 ```bash
 python3 -m venv .venv
 .venv/bin/python -m pip install -e '.[test]'
-.venv/bin/python -m pytest -q
-.venv/bin/python -m wellspring.ingest.cli month 2026-08 \
-  --archive fixtures/dwll2026-08.zip \
-  --db data/wellspring.sqlite3 --output output/2026-08
+.venv/bin/python -m wellspring.ingest.cli month 2026-08 --archive fixtures/dwll2026-08.zip --db data/wellspring.sqlite3 --output output/2026-08
+npm --prefix web ci --no-audit --no-fund
+npm --prefix web start
 ```
 
-Omit `--archive` to download the official monthly archive. The identified
-`Wellspring/0.1` User-Agent is required by the observed AER download path;
-403 responses are reported as failures, never treated as empty reports.
+The frontend opens on localhost:4200 and uses the live API by default. For an
+offline UI session, set its documented `mock` flag in
+`web/src/environments/environment.ts`. The local ingestion command above creates
+a SQLite database and export; it does not deploy an HTTP server. Run checks with
+`.venv/bin/python -m pytest -q` and
+`npm --prefix web test -- --watch=false`; `npm --prefix web run build` checks the
+production templates and bundle.
 
-Daily files have rolling MMDD names. Always validate their report headers:
-
-```bash
-.venv/bin/python -m wellspring.ingest.cli range 2026-09-24 2026-09-25 \
-  --db data/wellspring.sqlite3
-```
-
-Use monthly archives for historical data. `--stop-at` accepts an ISO timestamp
-with timezone and prevents starting a fetch within 35 seconds of that deadline.
-The backfill writes `manifest.json`, `events-<sha256>.jsonl`, and exact raw inputs under
-the chosen output directory. SQLite and generated outputs are ignored by Git.
-The manifest separates loaded, empty, missing, failed and stopped dates.
-Read the export named by `manifest.json`'s `export_file`. Export content is
-written first and the manifest pointer is replaced atomically. If publication
-fails, the previous manifest/export stay consistent; the valid SQLite import
-may be newer and a rerun finishes publication. Do not guess the newest file.
-An archive download failure writes `last-attempt.json` without replacing a
-previous dataset manifest. Failed ingestion is not a newly empty dataset.
-The public record schema is v1; the local storage schema is v2. Unreleased
-development v1 databases are refused with a rebuild instruction rather than
-migrated incompletely. Rebuild into a fresh database from retained raw inputs.
-
-## Data and limitations
-
-Source: [AER ST1](https://www.aer.ca/data-and-performance-reports/statistical-reports/st1).
-The AER labels these reports preliminary and subject to change. Noncommercial
-educational reproduction requires source attribution, due diligence, and no
-claim of official status or endorsement. Do not use the AER logo or treat this
-demo as commercially licensed redistribution. See the
-[AER copyright and disclaimer](https://www.aer.ca/copyright-and-disclaimer).
-Fixture URLs and SHA-256 digests are in `fixtures/sources.json`.
-
-An event key is `(licence_number, event_type, report_date)`. A licence can be
-issued and cancelled on the same day. It can also have several updated UWIs
-on the same day: these are ordered occurrences, not discarded duplicates.
-Sparse change records do not inherit missing fields from unrelated events.
-Changed fields preserve their exact labels and values; they do not silently
-rewrite the old identity columns. Summary UWI is null when occurrences differ.
-
-Ingestion preserves the original M1 records. M2 export enrichment derives DLS
-positions from the surface location only; see `docs/DLS.md` for measured errors
-and the supported area. Unsupported positions remain null with a reason.
-Township-grid positions are labelled approximate, not survey-grade.
-No numeric point is inferred from a well name, a bottomhole location or an
-unverified UWI normalization. Alphanumeric UWI prefixes are preserved.
-The August fixture contains no separately titled reentry section; reentry
-support currently has synthetic coverage and needs a real source example.
+## How the data moves
 
 ```mermaid
 flowchart LR
-  A[AER daily TXT or monthly ZIP] --> B[Bounded download and header validation]
-  B --> C[Section-aware parser]
-  C --> D[Versioned raw source and current event SQLite]
-  D --> E[JSONL export and coverage manifest]
-  E -. later .-> F[S3 and read-only Lambda API]
-  F -. later .-> G[Angular dashboard and map]
+  A[AER ST1 reports] --> B[Date and fixed-width validation]
+  B --> C[Source history and licence events]
+  C --> D[Approximate surface DLS enrichment]
+  D --> E[S3 JSONL snapshot and coverage manifest]
+  E --> F[Read-only Lambda HTTP API]
+  F --> G[Angular app on CloudFront]
+  H[07:00 Mountain schedule] --> B
 ```
 
-See `docs/API-CONTRACT.md` for Nabu's shared shapes and `docs/M1-EVIDENCE.md`
-for measured fixture counts. `docs/SPEC.md` remains the overall scope.
+A licence can be issued and cancelled on the same day. It can also have several
+updated well identifiers on that day. The event key is licence number, event
+type and report date, with ordered occurrences retained under each event. Sparse
+amendments do not silently borrow fields from other events. Original labels,
+source lines, raw bytes, hashes and parser versions remain inspectable.
+
+Source filenames contain only month and day and can retain last year's report.
+The header date must match the requested date. Invalid record structure or dates
+cannot replace a valid published day. A location the map cannot interpret is
+preserved as a nullable field with a reason instead of dropping the licence.
+
+The API loads only the export named by its manifest and verifies its byte hash.
+Publication writes the immutable export first and switches the manifest last.
+A failed refresh preserves previous valid source dates and reports the failure.
+
+## Approximate map positions
+
+Positions come from the surface legal land description, never the well name or
+bottomhole identifier. The offline township-grid approximation was checked
+against 77 source-linked Government of Alberta ATS polygons, including seven
+held-out checks. Maximum observed centre-to-centre error was 1.201 km on those
+samples. This is not a universal error bound or a surveyed wellhead position.
+Unsupported or missing descriptions remain null with a reason. See
+[the method, reference data and limits](docs/DLS.md).
+
+## Deploy and operate
+
+[Deployment instructions](docs/DEPLOYMENT.md) describe the single CloudFormation
+template, private data/site buckets, CloudFront access, scoped function roles,
+immutable packages and deployment verification. Deployment requests are recorded
+separately from successful deployed-code verification. The daily schedule uses
+`America/Edmonton` so 7am Mountain follows daylight saving time.
+
+[The API contract](docs/API-CONTRACT.md) documents filters, pagination, points,
+coverage and refusal responses. [Cost and access evidence](docs/COST-ACCESS.md)
+records current limits and assumptions. The owner-managed budget alarm is not a
+spending cap. Secrets are never part of the repository or deployment package.
+
+## Sources and terms
+
+ST1 is preliminary data and may be revised. The AER source and reproduction terms
+are linked below. Noncommercial educational reproduction requires attribution,
+due diligence and no suggestion of official status or endorsement. This demo
+uses no AER logo and does not claim commercial redistribution rights.
+
+- [AER ST1 reports](https://www.aer.ca/data-and-performance-reports/statistical-reports/st1)
+- [AER copyright and disclaimer](https://www.aer.ca/copyright-and-disclaimer)
+- [Government of Alberta ATS subdivision layer](https://geospatial.alberta.ca/titan/rest/services/ags_apps/ags_apps_alberta_township_system/MapServer/3)
+- Fixture source URLs, hashes and retrieval notes: `fixtures/sources.json` and
+  `fixtures/dls-reference.json`.
+
+## How this was built
+
+Josii directed Wellspring and reviewed its changes in Scriptorium. Tenjin and
+Nabu are AI coding agents: Tenjin implemented ingestion, the API and AWS setup;
+Nabu implemented the Angular app. The work used automated reviews, tests and
+runtime checks, with evidence and limitations recorded alongside each milestone.
+Data comes from the Alberta Energy Regulator's public ST1 Well Licences Issued
+Daily reports. Map positions are approximate, derived from legal land
+descriptions with the township grid method.
