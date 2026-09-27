@@ -35,8 +35,9 @@ export const AER_ST1_URL = 'https://www.aer.ca/providing-information/data-and-re
     <p>
       Source: <a [href]="aer" rel="noopener">AER ST1, Well Licences Issued Daily List</a>, public data, attributed to the
       Alberta Energy Regulator. The daily lists are fetched once a day; days the source did not publish, or that failed
-      to load, are shown as gaps, never as zeros. Positions come from the township grid method and are accurate to
-      roughly a section (about 1.6 km); they are unsuitable for navigation, land decisions or measurement.
+      to load, are shown as gaps, never as zeros. Positions use a township-grid approximation. Across 77 reference
+      checks the largest observed error was 1.201 km and the mean was 0.192 km; this is not a guaranteed accuracy bound.
+      Positions are unsuitable for navigation, land decisions or measurement.
     </p>
     <p>Source code: <a [href]="repo" rel="noopener">{{ repo }}</a>.</p>
   `,

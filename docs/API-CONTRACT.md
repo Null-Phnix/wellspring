@@ -101,8 +101,8 @@ arrays are sliced to the requested date window and `reports_loaded` is the
 count of `loaded_dates` in that window. Loaded dates include parsed empty days.
 Daily statistics emit zero for a loaded date with no matching events, but never
 invent a zero for a missing or failed date. Null grouping values mean unreported,
-not a guessed company/formation. The client CSV exports loaded rows, labelled
-as such; it is not a full-database export.
+not a guessed company/formation. The client CSV export fetches matching rows up to its stated 2,000-row cap;
+it is not a complete export when the match count exceeds that cap.
 
 ## Shared metadata
 

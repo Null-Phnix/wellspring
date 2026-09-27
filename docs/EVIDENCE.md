@@ -17,7 +17,8 @@ are separate evidence. Scriptorium issue #1 contains the coordinated receipts.
 ## Tests and forge evidence
 
 The integrated M4 source passed **316 backend tests**, **31 web tests in 8 files**
-and the Angular production build. The M4 predecessor a4c337a passed 310 backend
+and the Angular production build. The 316 backend tests passed under both
+Python 3.11 and 3.14. The M4 predecessor a4c337a passed 310 backend
 tests; Nabu independently reproduced those 310 plus the same 31 web tests.
 Six additional regressions cover the official ST1/ archive wrapper without
 allowing traversal, arbitrary nesting or duplicate days. SQL tests cover read-only enforcement, DML/DDL, PRAGMA,
@@ -105,7 +106,9 @@ report header/hash, all eight archive layouts and SQLite integrity. API loading
 plus grouped SQL ran locally in 0.284 seconds at 134.4 MiB peak RSS. That is local
 capacity evidence. Live Lambda reports subsequently measured 213 MB cold and
 251 MB on a warm snapshot refresh, triggering the release configuration increase
-to 512 MiB. Runtime readback after that change is recorded separately.
+to 512 MiB. Post-update readback at 17:16 UTC confirmed UPDATE_COMPLETE,
+API MemorySize 512, Timeout 15 and Successful update state; the code hash
+remained unchanged and a fresh API call still returned all 8,811 events.
 
 January 11 and 16 lack an end marker; July 9 contains a literal `/---W/` UWI in
 an amendment. Independent owner downloads from the rolling daily endpoints
