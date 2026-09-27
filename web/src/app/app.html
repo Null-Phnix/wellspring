@@ -1,0 +1,16 @@
+<header class="top">
+  <a routerLink="/" class="brand">Wellspring</a>
+  <nav>
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Dashboard</a>
+    <a routerLink="/licences" routerLinkActive="active">Licences</a>
+    <a routerLink="/map" routerLinkActive="active">Map</a>
+    <a routerLink="/ask" routerLinkActive="active">Ask</a>
+  </nav>
+</header>
+<main>
+  <router-outlet />
+</main>
+<footer>
+  Data: <a href="https://www.aer.ca/">Alberta Energy Regulator</a> (AER), ST1 Well Licences Issued Daily List, public data.
+  Map positions are approximate. Wellspring is an independent portfolio project and is not affiliated with the AER.
+</footer>
